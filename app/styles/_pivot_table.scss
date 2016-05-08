@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.argus-table {
+  background-color: #fff;
+  border-collapse: collapse;
+  width: 100%;
+
+  th,
+  td {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  th {
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+  }
+
+  td {
+    text-align: right;
+  }
+
+  .pivot-row-label,
+  .pivot-col-total-label {
+    text-align: right;
+  }
+
+  .pivot-col-label,
+  .pivot-measure-label,
+  .pivot-row-total-label {
+    text-align: center;
+  }
+
+  .pivot-grand-total,
+  .pivot-total-val {
+    font-weight: bold;
+  }
+}
+
+.table-bordered {
+  border: 1px solid #dddddd;
+
+  & > thead > tr > th,
+  & > tbody > tr > th,
+  & > tfoot > tr > th,
+  & > thead > tr > td,
+  & > tbody > tr > td,
+  & > tfoot > tr > td {
+    border: 1px solid #dddddd;
+  }
+
+  & > thead > tr > th,
+  & > thead > tr > td {
+    border-bottom-width: 2px;
+  }
+}
