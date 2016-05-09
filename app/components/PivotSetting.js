@@ -32,6 +32,8 @@ class PivotSetting extends Component {
     const id = this.refs.col_columns.value;
     const sort = {
       type: 'self',
+      key: [],
+      position: null,
       kind: 'col',
       ascending: true,
     };
@@ -67,7 +69,7 @@ class PivotSetting extends Component {
     const { pivot, actions } = this.props;
 
     return pivot.cols.map(col =>
-      <ColElement key={col.id} data={col} actions={actions} />
+      <ColElement key={col.id} data={col} pivot={pivot} actions={actions} />
     );
   }
 
@@ -84,6 +86,19 @@ class PivotSetting extends Component {
 
     return (
       <div>
+        <div>
+          <label>Measures</label>
+          <select ref="measure_columns" defaultValue={recordColumns[0]}>
+            {recordColumns.map(column =>
+              <option key={column} value={column}>{column}</option>
+            )}
+          </select>
+          <button onClick={this.addMeasure}>Add measure</button>
+          <ul>
+            {this.renderMeasures()}
+          </ul>
+        </div>
+
         <div>
           <label>Rows</label>
           <select ref="row_columns" defaultValue={recordColumns[0]}>
@@ -107,19 +122,6 @@ class PivotSetting extends Component {
           <button onClick={this.addCol}>Add col</button>
           <ul>
             {this.renderCols()}
-          </ul>
-        </div>
-
-        <div>
-          <label>Measures</label>
-          <select ref="measure_columns" defaultValue={recordColumns[0]}>
-            {recordColumns.map(column =>
-              <option key={column} value={column}>{column}</option>
-            )}
-          </select>
-          <button onClick={this.addMeasure}>Add measure</button>
-          <ul>
-            {this.renderMeasures()}
           </ul>
         </div>
       </div>

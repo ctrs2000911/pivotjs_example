@@ -76,7 +76,13 @@ class RowElement extends Component {
   renderSortKeySelect() {
     const { pivot, data } = this.props;
     return this.props.data.sort.type !== 'self'
-      ? <SortKeySelect pivot={pivot} data={data.sort.key || []} action={this.updateSortKey} />
+      ?
+      <SortKeySelect
+        pivot={pivot}
+        direction="col"
+        data={data.sort.key || []}
+        action={this.updateSortKey}
+      />
       : null;
   }
 
@@ -86,15 +92,14 @@ class RowElement extends Component {
     return (
       <li key={data.id} data-value={data.id}>
         <input ref="id" value={data.id} />
-        <select ref="type" defaultValue={data.sort.type}>
+        <select ref="type" defaultValue={data.sort.type} onChange={this.modifyRow}>
           {this.renderTypeOptions()}
         </select>
         {this.renderSortKeySelect()}
-        <select ref="sortOrder" defaultValue={data.sort.ascending}>
+        <select ref="sortOrder" defaultValue={data.sort.ascending} onChange={this.modifyRow}>
           {this.renderSortOrdersOptions()}
         </select>
-        <button onClick={this.modifyRow} value={data.id}>apply change</button>
-        <button onClick={this.removeRow} value={data.id}>remove</button>
+        <button value={data.id} onClick={this.removeRow}>remove</button>
       </li>
     );
   }

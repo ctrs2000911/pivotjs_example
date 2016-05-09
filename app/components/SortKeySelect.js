@@ -39,9 +39,15 @@ class SortKeySelect extends Component {
   }
 
   renderNestedKeys(keys) {
-    const nestedKeys = this.props.pivot.pivotTableData
-      ? this.props.pivot.pivotTableData.getNestedColKeys()
-      : { children: [] };
+    let nestedKeys = { children: [] };
+
+    if (this.props.pivot.pivotTableData) {
+      if (this.props.direction === 'col') {
+        nestedKeys = this.props.pivot.pivotTableData.getNestedColKeys();
+      } else {
+        nestedKeys = this.props.pivot.pivotTableData.getNestedRowKeys();
+      }
+    }
 
     const keySelects = [];
     let keyList = nestedKeys;
@@ -56,14 +62,17 @@ class SortKeySelect extends Component {
 
   render() {
     const keys = Object.assign([], this.props.data);
-    if (keys.length < this.props.pivot.cols.length) {
+    const attrs = this.props.direction === 'col'
+      ? this.props.pivot.cols
+      : this.props.pivot.rows;
+    if (keys.length < attrs.length) {
       keys.push('Total');
     }
 
     return (
-      <div>
+      <span>
         {this.renderNestedKeys(keys)}
-      </div>
+      </span>
     );
   }
 }
@@ -71,6 +80,7 @@ class SortKeySelect extends Component {
 SortKeySelect.propTypes = {
   pivot: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
+  direction: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired,
 };
 
