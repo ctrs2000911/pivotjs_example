@@ -5,12 +5,6 @@ import _ from 'lodash';
 import TableData from './TableData';
 
 class Main extends Component {
-  constructor(prop) {
-    super(prop);
-
-    this.applyPivot = this.applyPivot.bind(this);
-  }
-
   componentDidMount() {
     console.log('componentDidMount')
     this.updateTableDisplay();
@@ -30,7 +24,12 @@ class Main extends Component {
   }
 
   updateTableDisplay(prevProps, prevState) {
-    if (prevProps && prevProps.pivot.pivotTableData === this.props.pivot.pivotTableData) {
+    const pivotTableDataIsNotChanged = prevProps
+      && prevProps.pivot.pivotTableData === this.props.pivot.pivotTableData;
+    const chartOptionsIsNotChanged = prevProps
+      && prevProps.chartOptions === this.props.chartOptions;
+
+    if (pivotTableDataIsNotChanged && chartOptionsIsNotChanged) {
       return;
     }
 
@@ -103,27 +102,15 @@ class Main extends Component {
         .text(d => (d ? d.value : '-'));
   }
 
-  applyPivot() {
-    this.props.actions.populate();
-  }
-
   render() {
     console.log('render');
-    return (
-      <div>
-        <div>
-          <button onClick={this.applyPivot}>Apply!!</button>
-        </div>
-        <div ref="pivotTable"></div>
-      </div>
-    );
+    return <div ref="pivotTable" />;
   }
 }
 
 Main.propTypes = {
   pivot: PropTypes.object.isRequired,
   chartOptions: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
 };
 
 export default Main;

@@ -16,7 +16,7 @@ class App extends Component {
         <RecordsEditor pivot={pivot} actions={actions} />
         <PivotSetting pivot={pivot} actions={actions} />
         <ChartOptions chartOptions={chartOptions} actions={actions} />
-        <Main pivot={pivot} chartOptions={chartOptions} actions={actions} />
+        <Main pivot={pivot} chartOptions={chartOptions} />
       </div>
     );
   }
