@@ -73,7 +73,7 @@ class TableData {
     }
 
 
-    let cols = this.pivot.getColKeys();
+    let cols = this.pivot.getSortedColKeys();
     if (this.options.showTotal) {
       cols = cols.concat([[]]);
     }

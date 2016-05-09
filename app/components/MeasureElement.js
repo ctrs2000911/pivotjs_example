@@ -45,14 +45,13 @@ class MeasureElement extends Component {
 
     return (
       <li data-value={data.id}>
-        <input ref="name" defaultValue={data.name} />
+        <input ref="name" defaultValue={data.name} onBlur={this.modifyMeasure} />
         <input ref="key" defaultValue={data.key} />
-        <input ref="format" defaultValue={data.format} />
-        <select ref="aggregation" defaultValue={data.aggregation}>
+        <input ref="format" defaultValue={data.format} onChange={this.modifyMeasure} />
+        <select ref="aggregation" defaultValue={data.aggregation} onChange={this.modifyMeasure}>
           {this.renderAggregationOptions()}
         </select>
-        <button onClick={this.modifyMeasure} value={data.id}>apply change</button>
-        <button onClick={this.removeMeasure} value={data.id}>remove</button>
+        <button value={data.id} onClick={this.removeMeasure}>remove</button>
       </li>
     );
   }
