@@ -6,24 +6,14 @@ import TableData from './TableData';
 
 class Main extends Component {
   componentDidMount() {
-    console.log('componentDidMount')
     this.updateTableDisplay();
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps);
+  componentDidUpdate(...args) {
+    this.updateTableDisplay.apply(this, args);
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log('componentWillUpdate', nextProps, nextState);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate', prevProps, prevState);
-    this.updateTableDisplay(...arguments);
-  }
-
-  updateTableDisplay(prevProps, prevState) {
+  updateTableDisplay(prevProps) {
     const pivotTableDataIsNotChanged = prevProps
       && prevProps.pivot.pivotTableData === this.props.pivot.pivotTableData;
     const chartOptionsIsNotChanged = prevProps
@@ -103,7 +93,6 @@ class Main extends Component {
   }
 
   render() {
-    console.log('render');
     return <div ref="pivotTable" />;
   }
 }
