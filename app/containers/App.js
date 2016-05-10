@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import RecordsEditor from '../components/RecordsEditor';
 import ChartOptions from '../components/ChartOptions';
 import PivotSetting from '../components/PivotSetting';
-import Main from '../components/Main';
+import PivotTable from '../components/PivotTable';
 import * as Actions from '../actions';
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
         <RecordsEditor pivot={pivot} actions={actions} />
         <PivotSetting pivot={pivot} actions={actions} />
         <ChartOptions chartOptions={chartOptions} actions={actions} />
-        <Main pivot={pivot} chartOptions={chartOptions} />
+        <PivotTable pivot={pivot} chartOptions={chartOptions} />
       </div>
     );
   }
