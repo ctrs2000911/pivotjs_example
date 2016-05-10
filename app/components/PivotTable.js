@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import d3 from 'd3';
 import _ from 'lodash';
-import TableData from './TableData';
+import TableData from '../logic/TableData';
 
-class Main extends Component {
+class PivotTable extends Component {
   componentDidMount() {
     this.updateTableDisplay();
   }
@@ -97,9 +97,9 @@ class Main extends Component {
   }
 }
 
-Main.propTypes = {
+PivotTable.propTypes = {
   pivot: PropTypes.object.isRequired,
   chartOptions: PropTypes.object.isRequired,
 };
 
-export default Main;
+export default PivotTable;
