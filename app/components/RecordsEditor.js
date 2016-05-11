@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
 class RecordsEditor extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
 
     this.handleEvent = this.handleEvent.bind(this);
   }

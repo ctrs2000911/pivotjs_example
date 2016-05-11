@@ -16,9 +16,11 @@ export function populate() {
   return { type: PIVOT_TYPES.POPULATE };
 }
 
+
 export function changeRecords(recordString = '[]') {
   return { type: PIVOT_TYPES.CHANGE_RECORDS, recordString };
 }
+
 
 export function addRow(data) {
   return { type: PIVOT_TYPES.ADD_ROW, data };
@@ -30,6 +32,10 @@ export function modifyRow(data) {
 
 export function removeRow(id) {
   return { type: PIVOT_TYPES.REMOVE_ROW, id };
+}
+
+export function replaceRow(from, to) {
+  return { type: PIVOT_TYPES.REPLACE_ROW, from, to };
 }
 
 
@@ -45,6 +51,10 @@ export function removeCol(id) {
   return { type: PIVOT_TYPES.REMOVE_COL, id };
 }
 
+export function replaceCol(from, to) {
+  return { type: PIVOT_TYPES.REPLACE_COL, from, to };
+}
+
 
 export function addMeasure(data) {
   return { type: PIVOT_TYPES.ADD_MEASURE, data };
@@ -56,4 +66,8 @@ export function modifyMeasure(data) {
 
 export function removeMeasure(id) {
   return { type: PIVOT_TYPES.REMOVE_MEASURE, id };
+}
+
+export function replaceMeasure(from, to) {
+  return { type: PIVOT_TYPES.REPLACE_MEASURE, from, to };
 }

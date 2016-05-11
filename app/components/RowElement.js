@@ -3,8 +3,8 @@ import SortKeySelect from './SortKeySelect';
 import _ from 'lodash';
 
 class RowElement extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
 
     this.sortOrders = [
       { label: 'ascending', value: true },
@@ -90,7 +90,7 @@ class RowElement extends Component {
     const { data } = this.props;
 
     return (
-      <li key={data.id} data-value={data.id}>
+      <div key={data.id} data-value={data.id}>
         <input ref="id" value={data.id} />
         <select ref="type" defaultValue={data.sort.type} onChange={this.modifyRow}>
           {this.renderTypeOptions()}
@@ -100,7 +100,7 @@ class RowElement extends Component {
           {this.renderSortOrdersOptions()}
         </select>
         <button value={data.id} onClick={this.removeRow}>remove</button>
-      </li>
+      </div>
     );
   }
 }

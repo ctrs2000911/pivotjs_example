@@ -1,16 +1,51 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import RowElement from './RowElement';
 import ColElement from './ColElement';
 import MeasureElement from './MeasureElement';
+import SortableList from './SortableList';
 
 class PivotSetting extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
 
     this.addRow = this.addRow.bind(this);
     this.addCol = this.addCol.bind(this);
     this.addMeasure = this.addMeasure.bind(this);
+
+    this.renderRowElement = this.renderRowElement.bind(this);
+    this.renderColElement = this.renderColElement.bind(this);
+    this.renderMeasureElement = this.renderMeasureElement.bind(this);
+
+    this.measueItemPlaceChangedHandler = this.measueItemPlaceChangedHandler.bind(this);
+  }
+
+  componentDidMount() {
+    ReactDOM.findDOMNode(this)
+      .addEventListener('itemPlaceChanged', this.measueItemPlaceChangedHandler);
+  }
+
+  componentWillUnmount() {
+    this.removeEventListener('itemPlaceChanged', this.measueItemPlaceChangedHandler);
+  }
+
+  measueItemPlaceChangedHandler(e) {
+    const { from, to } = e.detail;
+
+    switch (e.target.getAttribute('data-name')) {
+      case 'measureList':
+        this.props.actions.replaceMeasure(from, to);
+        break;
+      case 'rowList':
+        this.props.actions.replaceRow(from, to);
+        break;
+      case 'colList':
+        this.props.actions.replaceCol(from, to);
+        break;
+      default:
+        return;
+    }
   }
 
   addRow() {
@@ -57,28 +92,19 @@ class PivotSetting extends Component {
     this.props.actions.addMeasure(measure);
   }
 
-  renderRows() {
+  renderRowElement(row) {
     const { pivot, actions } = this.props;
-
-    return pivot.rows.map(row =>
-      <RowElement key={row.id} data={row} pivot={pivot} actions={actions} />
-    );
+    return <RowElement key={row.id} data={row} pivot={pivot} actions={actions} />;
   }
 
-  renderCols() {
+  renderColElement(col) {
     const { pivot, actions } = this.props;
-
-    return pivot.cols.map(col =>
-      <ColElement key={col.id} data={col} pivot={pivot} actions={actions} />
-    );
+    return <ColElement key={col.id} data={col} pivot={pivot} actions={actions} />;
   }
 
-  renderMeasures() {
-    const { pivot, actions } = this.props;
-
-    return pivot.measures.map(measure =>
-      <MeasureElement key={measure.id} data={measure} actions={actions} />
-    );
+  renderMeasureElement(measure) {
+    const { actions } = this.props;
+    return <MeasureElement key={measure.id} data={measure} actions={actions} />;
   }
 
   render() {
@@ -94,9 +120,11 @@ class PivotSetting extends Component {
             )}
           </select>
           <button onClick={this.addMeasure}>Add measure</button>
-          <ul>
-            {this.renderMeasures()}
-          </ul>
+          <SortableList
+            name="measureList"
+            data={this.props.pivot.measures}
+            listElementRenderer={this.renderMeasureElement}
+          />
         </div>
 
         <div>
@@ -107,9 +135,11 @@ class PivotSetting extends Component {
             )}
           </select>
           <button onClick={this.addRow}>Add col</button>
-          <ul>
-            {this.renderRows()}
-          </ul>
+          <SortableList
+            name="rowList"
+            data={this.props.pivot.rows}
+            listElementRenderer={this.renderRowElement}
+          />
         </div>
 
         <div>
@@ -120,9 +150,11 @@ class PivotSetting extends Component {
             )}
           </select>
           <button onClick={this.addCol}>Add col</button>
-          <ul>
-            {this.renderCols()}
-          </ul>
+          <SortableList
+            name="colList"
+            data={this.props.pivot.cols}
+            listElementRenderer={this.renderColElement}
+          />
         </div>
       </div>
     );
