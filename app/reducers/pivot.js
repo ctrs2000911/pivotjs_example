@@ -81,6 +81,14 @@ const pivot = (state = initialState, action) => {
 
       return Object.assign({}, state, { rows, pivotTableData });
     }
+    case TYPES.REPLACE_ROW: {
+      const rows = Object.assign([], state.rows);
+
+      rows.splice(action.to, 0, rows.splice(action.from, 1)[0]);
+      const pivotTableData = populate(state, { rows });
+
+      return Object.assign({}, state, { rows, pivotTableData });
+    }
 
     // col
     case TYPES.ADD_COL: {
@@ -103,6 +111,14 @@ const pivot = (state = initialState, action) => {
       const cols = Object.assign([], state.cols);
 
       cols.splice(index, 1);
+      const pivotTableData = populate(state, { cols });
+
+      return Object.assign({}, state, { cols, pivotTableData });
+    }
+    case TYPES.REPLACE_COL: {
+      const cols = Object.assign([], state.cols);
+
+      cols.splice(action.to, 0, cols.splice(action.from, 1)[0]);
       const pivotTableData = populate(state, { cols });
 
       return Object.assign({}, state, { cols, pivotTableData });
@@ -134,6 +150,15 @@ const pivot = (state = initialState, action) => {
 
       return Object.assign({}, state, { measures, pivotTableData });
     }
+    case TYPES.REPLACE_MEASURE: {
+      const measures = Object.assign([], state.measures);
+
+      measures.splice(action.to, 0, measures.splice(action.from, 1)[0]);
+      const pivotTableData = populate(state, { measures });
+
+      return Object.assign({}, state, { measures, pivotTableData });
+    }
+
     default:
       return state;
   }

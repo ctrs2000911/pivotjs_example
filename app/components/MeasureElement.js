@@ -44,7 +44,7 @@ class MeasureElement extends Component {
     const data = this.props.data;
 
     return (
-      <li data-value={data.id}>
+      <div data-value={data.id}>
         <input ref="name" defaultValue={data.name} onBlur={this.modifyMeasure} />
         <input ref="key" defaultValue={data.key} />
         <input ref="format" defaultValue={data.format} onChange={this.modifyMeasure} />
@@ -52,7 +52,7 @@ class MeasureElement extends Component {
           {this.renderAggregationOptions()}
         </select>
         <button value={data.id} onClick={this.removeMeasure}>remove</button>
-      </li>
+      </div>
     );
   }
 }
