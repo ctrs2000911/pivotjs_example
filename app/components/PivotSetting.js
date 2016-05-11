@@ -7,8 +7,8 @@ import MeasureElement from './MeasureElement';
 import SortableList from './SortableList';
 
 class PivotSetting extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
 
     this.addRow = this.addRow.bind(this);
     this.addCol = this.addCol.bind(this);

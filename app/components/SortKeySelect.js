@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 
 class SortKeySelect extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
 
     this.changeKey = this.changeKey.bind(this);
   }

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
 class MeasureElement extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
 
     this.aggregations = [
       'sum',

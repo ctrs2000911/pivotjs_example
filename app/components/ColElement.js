@@ -3,8 +3,8 @@ import SortKeySelect from './SortKeySelect';
 import _ from 'lodash';
 
 class ColElement extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
 
     this.sortOrders = [
       { label: 'ascending', value: true },
