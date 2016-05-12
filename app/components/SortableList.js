@@ -5,6 +5,8 @@ class SortableList extends Component {
   constructor(props) {
     super(props);
 
+    this.dragged = null;
+
     // TODO:
     const data = JSON.parse(JSON.stringify(props.data));
     this.state = { data };
@@ -38,7 +40,7 @@ class SortableList extends Component {
     this.dragged.style.opacity = 0.4;
     ee.dataTransfer.effectAllowed = 'move';
 
-    e.dataTransfer.setData('text/html', e.currentTarget); // for FireFox
+    ee.dataTransfer.setData('text/html', e.currentTarget);
   }
 
   dragEnd() {
@@ -61,6 +63,9 @@ class SortableList extends Component {
     data.splice(to, 0, data.splice(from, 1)[0]);
     this.setState({ data });
 
+    this.dragged = null;
+
+    // trigger event when replaced
     const evt = new CustomEvent('MouseEvents', { detail: { data, from, to } });
     evt.initEvent('itemPlaceChanged', true, true);
     ReactDOM.findDOMNode(this).dispatchEvent(evt);
@@ -69,23 +74,27 @@ class SortableList extends Component {
   dragOver(e) {
     e.preventDefault();
 
-    if (e.target.className === 'placeholder') {
+    if (this.dragged === null || e.target.className === 'placeholder') {
       return;
     }
 
     this.over = e.target;
-    if (this.over.className !== 'sortable-list-el') {
+    while (this.over.className !== 'sortable-list-el') {
       this.over = this.over.parentNode;
+      if (this.over === window) {
+        break;
+      }
     }
 
-    const relY = e.clientY - this.over.offsetTop;
-    const height = (this.over.offsetHeight - 10) / 2;
     const parent = this.over.parentNode;
 
-    if (relY > height) {
+    const diff = e.clientY - this.over.offsetTop;
+    const height = (this.over.offsetHeight - 10) / 2;
+
+    if (diff > height) {
       this.nodePlacement = 'after';
       parent.insertBefore(this.placeholder, this.over.nextElementSibling);
-    } else if (relY < height) {
+    } else if (diff < height) {
       this.nodePlacement = 'before';
       parent.insertBefore(this.placeholder, this.over);
     }
@@ -96,8 +105,6 @@ class SortableList extends Component {
   }
 
   renderListElement(element, index) {
-    let el = this.renderer(element, index);
-
     return (
       <li
         className="sortable-list-el"
@@ -107,7 +114,7 @@ class SortableList extends Component {
         onDragEnd={this.dragEnd}
         onDragStart={this.dragStart}
       >
-        {el}
+        {this.renderer(element, index)}
       </li>
     );
   }
