@@ -53,7 +53,9 @@ const pivot = (state = initialState, action) => {
         records: JSON.parse(action.recordString.replace(/\n/g, '')),
       };
 
-      return Object.assign({}, state, { newState });
+      const pivotTableData = populate(state, { records: newState.records });
+
+      return Object.assign({}, state, newState, { pivotTableData });
     }
 
     // row
