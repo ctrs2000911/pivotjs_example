@@ -89,10 +89,14 @@ class ColElement extends Component {
   render() {
     const { data } = this.props;
 
+    const typeDefaultValue = data.sort.type === 'self'
+      ? 'self'
+      : this.props.pivot.measures[data.sort.position].id;
+
     return (
       <div key={data.id} data-value={data.id}>
         <input ref="id" value={data.id} />
-        <select ref="type" defaultValue={data.sort.type} onChange={this.modifyCol}>
+        <select ref="type" defaultValue={typeDefaultValue} onChange={this.modifyCol}>
           {this.renderTypeOptions()}
         </select>
         {this.renderSortKeySelect()}

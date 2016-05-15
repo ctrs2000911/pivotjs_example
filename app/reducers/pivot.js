@@ -161,6 +161,15 @@ const pivot = (state = initialState, action) => {
       return Object.assign({}, state, { measures, pivotTableData });
     }
 
+    case TYPES.REPLACE_ROWS_WITH_COLS: {
+      const rows = Object.assign([], state.cols);
+      const cols = Object.assign([], state.rows);
+
+      const pivotTableData = populate(state, { rows, cols });
+
+      return Object.assign({}, state, { rows, cols, pivotTableData });
+    }
+
     default:
       return state;
   }
