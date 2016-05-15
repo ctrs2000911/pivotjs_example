@@ -138,7 +138,7 @@ class PivotSetting extends Component {
               <option key={column} value={column}>{column}</option>
             )}
           </select>
-          <button onClick={this.addRow}>Add col</button>
+          <button onClick={this.addRow}>Add row</button>
           <SortableList
             name="rowList"
             data={pivot.rows}
