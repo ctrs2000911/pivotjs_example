@@ -19,7 +19,7 @@ class RowElement extends Component {
   modifyRow() {
     const type = this.refs.type.value === 'self' ? 'self' : 'measure';
     const ascending = this.refs.sortOrder.value === 'true';
-    const position = type === 'measure'
+    const measureIndex = type === 'measure'
       ? _.findIndex(this.props.pivot.measures, measure => measure.id === this.refs.type.value)
       : null;
 
@@ -29,7 +29,7 @@ class RowElement extends Component {
         type,
         key: this.props.data.sort.key,
         kind: 'row',
-        position,
+        measureIndex,
         ascending,
       },
     };
@@ -91,7 +91,7 @@ class RowElement extends Component {
 
     const typeDefaultValue = data.sort.type === 'self'
       ? 'self'
-      : this.props.pivot.measures[data.sort.position].id;
+      : this.props.pivot.measures[data.sort.measureIndex].id;
 
     return (
       <div key={data.id} data-value={data.id}>
