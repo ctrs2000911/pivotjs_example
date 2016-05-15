@@ -53,7 +53,7 @@ class PivotSetting extends Component {
     const sort = {
       type: 'self',
       key: [],
-      position: null,
+      measureIndex: null,
       ascending: true,
     };
 
@@ -67,7 +67,7 @@ class PivotSetting extends Component {
     const sort = {
       type: 'self',
       key: [],
-      position: null,
+      measureIndex: null,
       ascending: true,
     };
 
