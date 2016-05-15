@@ -71,3 +71,7 @@ export function removeMeasure(id) {
 export function replaceMeasure(from, to) {
   return { type: PIVOT_TYPES.REPLACE_MEASURE, from, to };
 }
+
+export function replaceRowsWithCols() {
+  return { type: PIVOT_TYPES.REPLACE_ROWS_WITH_COLS };
+}

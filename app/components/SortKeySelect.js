@@ -21,7 +21,9 @@ class SortKeySelect extends Component {
   renderKey(keyObject, key) {
     let options = [];
     if (keyObject.children && keyObject.children.length > 0) {
-      options = keyObject.children.map(obj => <option key={obj.key}>{obj.key}</option>);
+      options = keyObject.children.map(obj =>
+        <option key={obj.key} value={obj.key}>{obj.key}</option>
+      );
     }
 
     return (
@@ -29,10 +31,10 @@ class SortKeySelect extends Component {
         key={keyObject.key}
         ref={keyObject.depth}
         data-depth={keyObject.depth}
-        defaultValue={key}
+        value={key}
         onChange={this.changeKey}
       >
-        <option key="total">Total</option>
+        <option key="total" value="Total">Total</option>
         {options}
       </select>
     );

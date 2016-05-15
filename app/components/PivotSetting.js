@@ -49,12 +49,11 @@ class PivotSetting extends Component {
   }
 
   addRow() {
-    const id = this.refs.row_columns.value;
+    const id = this.refs.rowColumns.value;
     const sort = {
       type: 'self',
       key: [],
       position: null,
-      kind: 'row',
       ascending: true,
     };
 
@@ -64,12 +63,11 @@ class PivotSetting extends Component {
   }
 
   addCol() {
-    const id = this.refs.col_columns.value;
+    const id = this.refs.colColumns.value;
     const sort = {
       type: 'self',
       key: [],
       position: null,
-      kind: 'col',
       ascending: true,
     };
 
@@ -79,7 +77,7 @@ class PivotSetting extends Component {
   }
 
   addMeasure() {
-    const key = this.refs.measure_columns.value;
+    const key = this.refs.measureColumns.value;
     const aggregation = 'sum';
 
     const measure = {
@@ -108,13 +106,19 @@ class PivotSetting extends Component {
   }
 
   render() {
-    const recordColumns = _.keys(this.props.pivot.records[0]);
+    const pivot = this.props.pivot;
+
+    let recordColumns = _.keys(pivot.records[0]);
+    const rowColumns = pivot.rows.map((row) => row.id);
+    const colColumns = pivot.cols.map((col) => col.id);
+    const usedColumns = rowColumns.concat(colColumns);
+    recordColumns = _.without(recordColumns, ...usedColumns);
 
     return (
       <div>
         <div>
           <label>Measures</label>
-          <select ref="measure_columns" defaultValue={recordColumns[0]}>
+          <select ref="measureColumns" defaultValue={recordColumns[0]}>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
@@ -122,14 +126,14 @@ class PivotSetting extends Component {
           <button onClick={this.addMeasure}>Add measure</button>
           <SortableList
             name="measureList"
-            data={this.props.pivot.measures}
+            data={pivot.measures}
             listElementRenderer={this.renderMeasureElement}
           />
         </div>
 
         <div>
           <label>Rows</label>
-          <select ref="row_columns" defaultValue={recordColumns[0]}>
+          <select ref="rowColumns" defaultValue={recordColumns[0]}>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
@@ -137,14 +141,15 @@ class PivotSetting extends Component {
           <button onClick={this.addRow}>Add col</button>
           <SortableList
             name="rowList"
-            data={this.props.pivot.rows}
+            data={pivot.rows}
             listElementRenderer={this.renderRowElement}
           />
         </div>
 
+        <button onClick={this.props.actions.replaceRowsWithCols}>Replace Rows with Cols</button>
         <div>
           <label>Cols</label>
-          <select ref="col_columns" defaultValue={recordColumns[0]}>
+          <select ref="colColumns" defaultValue={recordColumns[0]}>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
@@ -152,7 +157,7 @@ class PivotSetting extends Component {
           <button onClick={this.addCol}>Add col</button>
           <SortableList
             name="colList"
-            data={this.props.pivot.cols}
+            data={pivot.cols}
             listElementRenderer={this.renderColElement}
           />
         </div>
