@@ -79,7 +79,13 @@ const pivot = (state = initialState, action) => {
       const rows = Object.assign([], state.rows);
 
       rows.splice(index, 1);
-      const pivotTableData = populate(state, { rows });
+      const cols = state.cols.map(col => {
+        const sort = Object.assign({}, col.sort);
+        sort.key.splice(index, sort.key.length);
+        return Object.assign({}, col, { sort });
+      });
+
+      const pivotTableData = populate(state, { rows, cols });
 
       return Object.assign({}, state, { rows, pivotTableData });
     }
@@ -113,9 +119,15 @@ const pivot = (state = initialState, action) => {
       const cols = Object.assign([], state.cols);
 
       cols.splice(index, 1);
-      const pivotTableData = populate(state, { cols });
+      const rows = state.rows.map(row => {
+        const sort = Object.assign({}, row.sort);
+        sort.key.splice(index, sort.key.length);
+        return Object.assign({}, row, { sort });
+      });
 
-      return Object.assign({}, state, { cols, pivotTableData });
+      const pivotTableData = populate(state, { rows, cols });
+
+      return Object.assign({}, state, { rows, cols, pivotTableData });
     }
     case TYPES.REPLACE_COL: {
       const cols = Object.assign([], state.cols);
