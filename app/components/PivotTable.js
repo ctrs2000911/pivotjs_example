@@ -93,7 +93,7 @@ class PivotTable extends Component {
   }
 
   render() {
-    return <div ref="pivotTable" />;
+    return <div className="pivot-table-container" ref="pivotTable" />;
   }
 }
 

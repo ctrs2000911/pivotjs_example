@@ -4,10 +4,10 @@
   padding: 0;
 
   .sortable-list-el {
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
     padding: 5px;
-    background: #eee;
   }
-
 }
 
 li.placeholder {
@@ -15,8 +15,8 @@ li.placeholder {
 }
 
 li.placeholder:before {
-  content: '';
   color: rgb(225,210,90);
+  content: '';
   display: block;
   height: 4px;
 }

@@ -9,3 +9,62 @@ body,
   height: 100%;
   padding: 0;
 }
+
+.pivot-container {
+  margin: 20px 0;
+}
+
+.pivot-block {
+  background-color: #fefefe;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+  display: flex;
+  flex-direction: row;
+}
+
+.pivot-table-container {
+  overflow: auto;
+  padding: 6px;
+  width: calc(100% - 400px);
+}
+
+.pivot-setting-container {
+  background-color: #fbfbfb;
+  border-left: 1px solid #999;
+  box-shadow: -1px 0px 0px rgba(0, 0, 0, .2);
+  padding: 6px;
+  width: 400px;
+
+  .pivot-setting-block {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .pivot-setting-label {
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .pivot-setting-el-area {
+      margin: 10px;
+    }
+  }
+
+  .replace-rows-cols-button-block {
+    text-align: center;
+  }
+}
+
+.pivot-setting-el-container {
+  .key-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+}
+
+.chart-options-container {
+  margin-bottom: 10px;
+}

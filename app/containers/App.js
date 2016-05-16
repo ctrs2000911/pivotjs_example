@@ -14,9 +14,13 @@ class App extends Component {
     return (
       <div>
         <RecordsEditor pivot={pivot} actions={actions} />
-        <PivotSetting pivot={pivot} actions={actions} />
-        <ChartOptions chartOptions={chartOptions} actions={actions} />
-        <PivotTable pivot={pivot} chartOptions={chartOptions} />
+        <div className="pivot-container">
+          <ChartOptions chartOptions={chartOptions} actions={actions} />
+          <div className="pivot-block">
+            <PivotTable pivot={pivot} chartOptions={chartOptions} />
+            <PivotSetting pivot={pivot} actions={actions} />
+          </div>
+        </div>
       </div>
     );
   }
