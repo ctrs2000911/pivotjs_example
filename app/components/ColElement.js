@@ -28,7 +28,6 @@ class ColElement extends Component {
       sort: {
         type,
         key: this.props.data.sort.key,
-        kind: 'col',
         measureIndex,
         ascending,
       },

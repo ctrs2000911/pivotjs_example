@@ -28,7 +28,6 @@ class RowElement extends Component {
       sort: {
         type,
         key: this.props.data.sort.key,
-        kind: 'row',
         measureIndex,
         ascending,
       },
