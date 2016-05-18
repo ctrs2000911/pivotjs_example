@@ -48,14 +48,50 @@ const pivot = (state = initialState, action) => {
 
     // record
     case TYPES.CHANGE_RECORDS: {
+      const records = JSON.parse(action.recordString.replace(/\n/g, ''));
       const newState = {
         recordString: action.recordString,
-        records: JSON.parse(action.recordString.replace(/\n/g, '')),
+        records,
       };
 
-      const pivotTableData = populate(state, { records: newState.records });
+      const keys = _.keys(newState.records[0]);
 
-      return Object.assign({}, state, newState, { pivotTableData });
+      const rows = _(state.rows).map(row => {
+        let obj = null;
+        if (_.indexOf(keys, row.id) > -1) {
+          obj = row;
+        }
+
+        return obj;
+      })
+      .compact()
+      .value();
+
+      const cols = _(state.cols).map(col => {
+        let obj = null;
+        if (_.indexOf(keys, col.id) > -1) {
+          obj = col;
+        }
+
+        return obj;
+      })
+      .compact()
+      .value();
+
+      const measures = _(state.measures).map(measure => {
+        let obj = null;
+        if (_.indexOf(keys, measure.key) > -1) {
+          obj = measure;
+        }
+
+        return obj;
+      })
+      .compact()
+      .value();
+
+      const pivotTableData = populate(state, { rows, cols, measures, records });
+
+      return Object.assign({}, state, newState, { rows, cols, measures, pivotTableData });
     }
 
     // row
