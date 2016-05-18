@@ -59,9 +59,14 @@ body,
 
 .pivot-setting-el-container {
   .key-label {
+    display: inline-block;
     font-size: 14px;
     font-weight: 600;
     margin-right: 6px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 80px;
   }
 }
 
