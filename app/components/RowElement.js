@@ -11,6 +11,8 @@ class RowElement extends Component {
       { label: 'decending', value: false },
     ];
 
+    this.state = { id: props.data.id };
+
     this.modifyRow = this.modifyRow.bind(this);
     this.removeRow = this.removeRow.bind(this);
     this.updateSortKey = this.updateSortKey.bind(this);
@@ -24,7 +26,7 @@ class RowElement extends Component {
       : null;
 
     const newData = {
-      id: this.refs.id.value,
+      id: this.state.id,
       sort: {
         type,
         key: this.props.data.sort.key,
@@ -93,8 +95,8 @@ class RowElement extends Component {
       : this.props.pivot.measures[data.sort.measureIndex].id;
 
     return (
-      <div key={data.id} data-value={data.id}>
-        <input ref="id" value={data.id} />
+      <div className="pivot-setting-el-container" data-value={data.id}>
+        <label className="key-label" ref="id">{data.id}</label>
         <select ref="type" defaultValue={typeDefaultValue} onChange={this.modifyRow}>
           {this.renderTypeOptions()}
         </select>

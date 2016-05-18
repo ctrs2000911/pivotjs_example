@@ -4,6 +4,12 @@ class MeasureElement extends Component {
   constructor(props) {
     super(props);
 
+    this.formats = [
+      'int',
+      'float',
+      'percent',
+    ];
+
     this.aggregations = [
       'sum',
       'count',
@@ -16,6 +22,8 @@ class MeasureElement extends Component {
       'min',
     ];
 
+    this.state = { key: props.data.key };
+
     this.modifyMeasure = this.modifyMeasure.bind(this);
     this.removeMeasure = this.removeMeasure.bind(this);
   }
@@ -23,7 +31,7 @@ class MeasureElement extends Component {
   modifyMeasure() {
     const newData = {
       name: this.refs.name.value,
-      key: this.refs.key.value,
+      key: this.state.key,
       format: this.refs.format.value,
       aggregation: this.refs.aggregation.value,
     };
@@ -37,18 +45,26 @@ class MeasureElement extends Component {
     this.props.actions.removeMeasure(id);
   }
 
+
+  renderFormatOptions() {
+    return this.formats.map((format) => <option key={format} value={format}>{format}</option>);
+  }
+
   renderAggregationOptions() {
     return this.aggregations.map((agg) => <option key={agg} value={agg}>{agg}</option>);
   }
+
   render() {
     const data = this.props.data;
 
     return (
-      <div data-value={data.id}>
+      <div className="pivot-setting-el-container" data-value={data.id}>
+        <label className="key-label" ref="key">{data.key}</label>
         <input ref="name" defaultValue={data.name} onBlur={this.modifyMeasure} />
-        <input ref="key" defaultValue={data.key} />
-        <input ref="format" defaultValue={data.format} onChange={this.modifyMeasure} />
-        <select ref="aggregation" defaultValue={data.aggregation} onChange={this.modifyMeasure}>
+        <select ref="format" value={data.format} onChange={this.modifyMeasure}>
+          {this.renderFormatOptions()}
+        </select>
+        <select ref="aggregation" value={data.aggregation} onChange={this.modifyMeasure}>
           {this.renderAggregationOptions()}
         </select>
         <button value={data.id} onClick={this.removeMeasure}>remove</button>

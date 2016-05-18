@@ -115,51 +115,60 @@ class PivotSetting extends Component {
     recordColumns = _.without(recordColumns, ...usedColumns);
 
     return (
-      <div>
-        <div>
-          <label>Measures</label>
+      <div className="pivot-setting-container">
+        <div className="pivot-setting-block">
+          <label className="pivot-setting-label">Measures:</label>
           <select ref="measureColumns" defaultValue={recordColumns[0]}>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
           </select>
           <button onClick={this.addMeasure}>Add measure</button>
-          <SortableList
-            name="measureList"
-            data={pivot.measures}
-            listElementRenderer={this.renderMeasureElement}
-          />
+          <div className="pivot-setting-el-area">
+            <SortableList
+              name="measureList"
+              data={pivot.measures}
+              listElementRenderer={this.renderMeasureElement}
+            />
+          </div>
         </div>
 
-        <div>
-          <label>Rows</label>
+        <div className="pivot-setting-block">
+          <label className="pivot-setting-label">Rows:</label>
           <select ref="rowColumns" defaultValue={recordColumns[0]}>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
           </select>
           <button onClick={this.addRow}>Add row</button>
-          <SortableList
-            name="rowList"
-            data={pivot.rows}
-            listElementRenderer={this.renderRowElement}
-          />
+          <div className="pivot-setting-el-area">
+            <SortableList
+              name="rowList"
+              data={pivot.rows}
+              listElementRenderer={this.renderRowElement}
+            />
+          </div>
         </div>
 
-        <button onClick={this.props.actions.replaceRowsWithCols}>Replace Rows with Cols</button>
-        <div>
-          <label>Cols</label>
+        <div className="pivot-setting-block replace-rows-cols-button-block">
+          <button onClick={this.props.actions.replaceRowsWithCols}>Replace Rows with Cols</button>
+        </div>
+
+        <div className="pivot-setting-block">
+          <label className="pivot-setting-label">Cols:</label>
           <select ref="colColumns" defaultValue={recordColumns[0]}>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
           </select>
           <button onClick={this.addCol}>Add col</button>
-          <SortableList
-            name="colList"
-            data={pivot.cols}
-            listElementRenderer={this.renderColElement}
-          />
+          <div className="pivot-setting-el-area">
+            <SortableList
+              name="colList"
+              data={pivot.cols}
+              listElementRenderer={this.renderColElement}
+            />
+          </div>
         </div>
       </div>
     );

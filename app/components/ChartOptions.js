@@ -5,7 +5,7 @@ class ChartOptions extends Component {
     const { chartOptions, actions } = this.props;
 
     return (
-      <div>
+      <div className="chart-options-container">
         <label>
           <input
             type="checkbox"
