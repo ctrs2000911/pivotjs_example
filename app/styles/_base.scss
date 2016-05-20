@@ -84,8 +84,25 @@ body,
     width: 70px;
   }
 
+  .sort-type {
+    max-width: 140px;
+  }
+
+  .sort-key {
+    max-width: 60px;
+  }
+
   .element-content-block {
     width: 280px;
+  }
+
+  .element-content-area {
+    padding: 2px;
+  }
+
+  .sort-key-area {
+    background-color: rgba(0, 0, 0, .03);
+    margin-top: 2px;
   }
 }
 

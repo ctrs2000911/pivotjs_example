@@ -28,6 +28,7 @@ class SortKeySelect extends Component {
 
     return (
       <select
+        className="sort-key"
         key={keyObject.key}
         ref={keyObject.depth}
         data-depth={keyObject.depth}

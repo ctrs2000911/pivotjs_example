@@ -78,7 +78,7 @@ class RowElement extends Component {
     const { pivot, data } = this.props;
     return this.props.data.sort.type !== 'self'
       ?
-      <div>
+      <div className="element-content-area sort-key-area">
         <span className="aux-label">sort key</span>
         <SortKeySelect
           pivot={pivot}
@@ -101,9 +101,14 @@ class RowElement extends Component {
       <div className="pivot-setting-el-container" data-value={data.id}>
         <label className="key-label" ref="id">{data.id}</label>
         <div className="element-content-block">
-          <div>
+          <div className="element-content-area">
             <span className="aux-label">sort by</span>
-            <select ref="type" defaultValue={typeDefaultValue} onChange={this.modifyRow}>
+            <select
+              className="sort-type"
+              ref="type"
+              defaultValue={typeDefaultValue}
+              onChange={this.modifyRow}
+            >
               {this.renderTypeOptions()}
             </select>
             <select ref="sortOrder" defaultValue={data.sort.ascending} onChange={this.modifyRow}>
