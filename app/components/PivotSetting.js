@@ -50,6 +50,11 @@ class PivotSetting extends Component {
 
   addRow() {
     const id = this.refs.rowColumns.value;
+
+    if (id === 'add') {
+      return;
+    }
+
     const sort = {
       type: 'self',
       key: [],
@@ -64,6 +69,11 @@ class PivotSetting extends Component {
 
   addCol() {
     const id = this.refs.colColumns.value;
+
+    if (id === 'add') {
+      return;
+    }
+
     const sort = {
       type: 'self',
       key: [],
@@ -78,6 +88,11 @@ class PivotSetting extends Component {
 
   addMeasure() {
     const key = this.refs.measureColumns.value;
+
+    if (key === 'add') {
+      return;
+    }
+
     const aggregation = 'sum';
 
     const measure = {
@@ -118,12 +133,12 @@ class PivotSetting extends Component {
       <div className="pivot-setting-container">
         <div className="pivot-setting-block">
           <label className="pivot-setting-label">Measures:</label>
-          <select ref="measureColumns" defaultValue={recordColumns[0]}>
+          <select ref="measureColumns" value="add" onChange={this.addMeasure}>
+            <option key="add" value="add">add...</option>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
           </select>
-          <button onClick={this.addMeasure}>Add measure</button>
           <div className="pivot-setting-el-area">
             <SortableList
               name="measureList"
@@ -135,12 +150,12 @@ class PivotSetting extends Component {
 
         <div className="pivot-setting-block">
           <label className="pivot-setting-label">Rows:</label>
-          <select ref="rowColumns" defaultValue={recordColumns[0]}>
+          <select ref="rowColumns" value="add" onChange={this.addRow}>
+            <option key="add" value="add">add...</option>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
           </select>
-          <button onClick={this.addRow}>Add row</button>
           <div className="pivot-setting-el-area">
             <SortableList
               name="rowList"
@@ -156,12 +171,12 @@ class PivotSetting extends Component {
 
         <div className="pivot-setting-block">
           <label className="pivot-setting-label">Cols:</label>
-          <select ref="colColumns" defaultValue={recordColumns[0]}>
+          <select ref="colColumns" value="add" onChange={this.addCol}>
+            <option key="add" value="add">add...</option>
             {recordColumns.map(column =>
               <option key={column} value={column}>{column}</option>
             )}
           </select>
-          <button onClick={this.addCol}>Add col</button>
           <div className="pivot-setting-el-area">
             <SortableList
               name="colList"
