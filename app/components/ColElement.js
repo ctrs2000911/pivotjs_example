@@ -78,12 +78,15 @@ class ColElement extends Component {
     const { pivot, data } = this.props;
     return this.props.data.sort.type !== 'self'
       ?
-      <SortKeySelect
-        pivot={pivot}
-        direction="row"
-        data={data.sort.key || []}
-        action={this.updateSortKey}
-      />
+      <div>
+        <span className="aux-label">sort key</span>
+        <SortKeySelect
+          pivot={pivot}
+          direction="row"
+          data={data.sort.key || []}
+          action={this.updateSortKey}
+        />
+      </div>
       : null;
   }
 
@@ -97,14 +100,21 @@ class ColElement extends Component {
     return (
       <div className="pivot-setting-el-container" data-value={data.id}>
         <label className="key-label" ref="id">{data.id}</label>
-        <select ref="type" defaultValue={typeDefaultValue} onChange={this.modifyCol}>
-          {this.renderTypeOptions()}
-        </select>
-        {this.renderSortKeySelect()}
-        <select ref="sortOrder" defaultValue={data.sort.ascending} onChange={this.modifyCol}>
-          {this.renderSortOrders()}
-        </select>
-        <button value={data.id} onClick={this.removeCol}>remove</button>
+        <div className="element-content-block">
+          <div>
+            <span className="aux-label">sort by</span>
+            <select ref="type" defaultValue={typeDefaultValue} onChange={this.modifyCol}>
+              {this.renderTypeOptions()}
+            </select>
+            <select ref="sortOrder" defaultValue={data.sort.ascending} onChange={this.modifyCol}>
+              {this.renderSortOrders()}
+            </select>
+          </div>
+          {this.renderSortKeySelect()}
+        </div>
+        <div>
+          <button value={data.id} onClick={this.removeCol}>X</button>
+        </div>
       </div>
     );
   }

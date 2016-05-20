@@ -58,6 +58,10 @@ body,
 }
 
 .pivot-setting-el-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
   .key-label {
     display: inline-block;
     font-size: 14px;
@@ -66,7 +70,22 @@ body,
     overflow-x: hidden;
     text-overflow: ellipsis;
     vertical-align: middle;
-    width: 80px;
+    width: 50px;
+  }
+
+  .aux-label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 4px;
+  }
+
+  .measure-name {
+    margin-right: 4px;
+    width: 70px;
+  }
+
+  .element-content-block {
+    width: 280px;
   }
 }
 

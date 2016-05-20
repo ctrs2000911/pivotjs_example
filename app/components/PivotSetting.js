@@ -166,7 +166,7 @@ class PivotSetting extends Component {
         </div>
 
         <div className="pivot-setting-block replace-rows-cols-button-block">
-          <button onClick={this.props.actions.replaceRowsWithCols}>Replace Rows with Cols</button>
+          <button onClick={this.props.actions.replaceRowsWithCols}>Replace</button>
         </div>
 
         <div className="pivot-setting-block">

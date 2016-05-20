@@ -60,14 +60,24 @@ class MeasureElement extends Component {
     return (
       <div className="pivot-setting-el-container" data-value={data.id}>
         <label className="key-label" ref="key">{data.key}</label>
-        <input ref="name" defaultValue={data.name} onBlur={this.modifyMeasure} />
-        <select ref="format" value={data.format} onChange={this.modifyMeasure}>
-          {this.renderFormatOptions()}
-        </select>
-        <select ref="aggregation" value={data.aggregation} onChange={this.modifyMeasure}>
-          {this.renderAggregationOptions()}
-        </select>
-        <button value={data.id} onClick={this.removeMeasure}>remove</button>
+        <div className="element-content-block">
+          <span className="aux-label">name</span>
+          <input
+            className="measure-name"
+            ref="name"
+            defaultValue={data.name}
+            onBlur={this.modifyMeasure}
+          />
+          <select ref="format" value={data.format} onChange={this.modifyMeasure}>
+            {this.renderFormatOptions()}
+          </select>
+          <select ref="aggregation" value={data.aggregation} onChange={this.modifyMeasure}>
+            {this.renderAggregationOptions()}
+          </select>
+        </div>
+        <div>
+          <button value={data.id} onClick={this.removeMeasure}>X</button>
+        </div>
       </div>
     );
   }
