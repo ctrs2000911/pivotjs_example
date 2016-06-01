@@ -1,10 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Card } from 'material-ui/Card';
 import d3 from 'd3';
 import _ from 'lodash';
 import TableData from '../logic/TableData';
+import style from '../styles/pivot_table.scss';
 
 class PivotTable extends Component {
+  constructor(props) {
+    super(props);
+
+    this.style = {
+      overflow: 'auto',
+      padding: '16px',
+      width: 'calc(100% - 412px)',
+    };
+  }
+
   componentDidMount() {
     this.updateTableDisplay();
   }
@@ -38,10 +50,8 @@ class PivotTable extends Component {
 
     const table = d3.select(ReactDOM.findDOMNode(this.refs.pivotTable))
       .append('table')
-      .classed({
-        'argus-table': true,
-        'pvt-table': true,
-        'table-bordered': true,
+      .attr({
+        class: `${style['argus-table']} ${style['pivot-table']} ${style['table-bordered']}`,
       });
     const thead = table.append('thead');
     const tbody = table.append('tbody');
@@ -51,8 +61,8 @@ class PivotTable extends Component {
       .data(headerRows)
       .enter()
         .append('tr')
-        .classed({
-          'pivot-row': true,
+        .attr({
+          class: `${style['pivot-row']}`,
         })
         .selectAll('tr')
         .data(d => d.caption.concat(d.colKey))
@@ -70,7 +80,9 @@ class PivotTable extends Component {
       .data(bodyRows)
       .enter()
         .append('tr')
-        .classed({ 'pivot-row': true });
+        .attr({
+          class: `${style['pivot-row']}`,
+        });
 
     tbodyTr.selectAll('tr')
       .data(d => d.rowKey)
@@ -87,13 +99,19 @@ class PivotTable extends Component {
       .data(d => _.flatten(d.values))
       .enter()
         .append('td')
-        .classed({ 'pivot-val': true })
-        .attr('data-value', d => (d ? d.value : '-'))
+        .attr({
+          class: `${style['pivot-val']}`,
+          'data-value': d => (d ? d.value : '-'),
+        })
         .text(d => (d ? d.value : '-'));
   }
 
   render() {
-    return <div className="pivot-table-container" ref="pivotTable" />;
+    return (
+      <Card style={this.style}>
+        <div ref="pivotTable" />
+      </Card>
+    );
   }
 }
 

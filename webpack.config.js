@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const colorRebeccapurple = require('postcss-color-rebeccapurple');
 
 module.exports = [
   {
@@ -17,6 +19,7 @@ module.exports = [
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
+      new ExtractTextPlugin('test.css', { allChunks: true }),
     ],
     module: {
       loaders: [
@@ -26,30 +29,25 @@ module.exports = [
           exclude: /node_modules/,
           include: __dirname,
         },
-      ],
-    },
-  },
-  {
-    entry: ['./app/styles/style.scss'],
-    output: {
-      path: path.join(__dirname, 'dist'),
-      filename: 'style.css',
-      publicPath: '/static/',
-    },
-    plugins: [
-      new ExtractTextPlugin('style.css', { allChunks: true }),
-    ],
-    module: {
-      loaders: [
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+          loader: ExtractTextPlugin.extract(
+            'style-loader',
+            'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+          ),
         },
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
+          loader: ExtractTextPlugin.extract(
+            'style-loader',
+            'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader!postcss-loader'
+          ),
         },
       ],
     },
+    postcss: [
+      autoprefixer,
+      colorRebeccapurple,
+    ],
   },
 ];

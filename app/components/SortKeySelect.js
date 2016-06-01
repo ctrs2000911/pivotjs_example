@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import CSSModles from 'react-css-modules';
 import _ from 'lodash';
+import style from '../styles/base.scss';
 
 class SortKeySelect extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class SortKeySelect extends Component {
 
     return (
       <select
-        className="sort-key"
+        styleName="sort-key"
         key={keyObject.key}
         ref={keyObject.depth}
         data-depth={keyObject.depth}
@@ -91,4 +93,4 @@ SortKeySelect.initialState = {
   keys: [],
 };
 
-export default SortKeySelect;
+export default CSSModles(SortKeySelect, style);

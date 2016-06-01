@@ -1,29 +1,32 @@
 import React, { Component, PropTypes } from 'react';
+import CSSModles from 'react-css-modules';
+import { Card, CardText } from 'material-ui/Card';
+import Checkbox from 'material-ui/Checkbox';
+import style from '../styles/chart_options.scss';
 
 class ChartOptions extends Component {
   render() {
     const { chartOptions, actions } = this.props;
 
     return (
-      <div className="chart-options-container">
-        <label>
-          <input
-            type="checkbox"
-            checked={chartOptions.showSubTotal}
-            onChange={actions.changeShowSubTotal}
-          />
-          Show Sub Total
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={chartOptions.showTotal}
-            onChange={actions.changeShowTotal}
-          />
-          Show Total
-        </label>
-      </div>
+      <Card>
+        <CardText>
+          <div styleName="container">
+            <Checkbox
+              label="Show Sub Total"
+              styleName="checkbox"
+              checked={chartOptions.showSubTotal}
+              onCheck={actions.changeShowSubTotal}
+            />
+            <Checkbox
+              label="Show Total"
+              styleName="checkbox"
+              checked={chartOptions.showTotal}
+              onCheck={actions.changeShowTotal}
+            />
+          </div>
+        </CardText>
+      </Card>
     );
   }
 
@@ -34,4 +37,4 @@ ChartOptions.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-export default ChartOptions;
+export default CSSModles(ChartOptions, style);

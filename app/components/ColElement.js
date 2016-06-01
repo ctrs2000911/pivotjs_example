@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import SortKeySelect from './SortKeySelect';
+import CSSModles from 'react-css-modules';
 import _ from 'lodash';
+import SortKeySelect from './SortKeySelect';
+import style from '../styles/base.scss';
 
 class ColElement extends Component {
   constructor(props) {
@@ -15,7 +17,7 @@ class ColElement extends Component {
 
     this.modifyCol = this.modifyCol.bind(this);
     this.removeCol = this.removeCol.bind(this);
-    this.updateSortKey = this.updateSortKey.bind(this)
+    this.updateSortKey = this.updateSortKey.bind(this);
   }
 
   modifyCol() {
@@ -78,8 +80,8 @@ class ColElement extends Component {
     const { pivot, data } = this.props;
     return this.props.data.sort.type !== 'self'
       ?
-      <div className="element-content-area sort-key-area">
-        <span className="aux-label">sort key</span>
+      <div styleName="sort-key-area">
+        <span styleName="aux-label">sort key</span>
         <SortKeySelect
           pivot={pivot}
           direction="row"
@@ -98,13 +100,13 @@ class ColElement extends Component {
       : this.props.pivot.measures[data.sort.measureIndex].id;
 
     return (
-      <div className="pivot-setting-el-container" data-value={data.id}>
-        <label className="key-label" ref="id">{data.id}</label>
-        <div className="element-content-block">
-          <div className="element-content-area">
-            <span className="aux-label">sort by</span>
+      <div styleName="pivot-setting-el-container" data-value={data.id}>
+        <label styleName="key-label" ref="id">{data.id}</label>
+        <div styleName="element-content-block">
+          <div styleName="element-content-area">
+            <span styleName="aux-label">sort by</span>
             <select
-              className="sort-type"
+              styleName="sort-type"
               ref="type"
               defaultValue={typeDefaultValue}
               onChange={this.modifyCol}
@@ -131,4 +133,4 @@ ColElement.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-export default ColElement;
+export default CSSModles(ColElement, style);

@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import CSSModles from 'react-css-modules';
+import style from '../styles/base.scss';
 
 class MeasureElement extends Component {
   constructor(props) {
@@ -58,12 +60,12 @@ class MeasureElement extends Component {
     const data = this.props.data;
 
     return (
-      <div className="pivot-setting-el-container" data-value={data.id}>
-        <label className="key-label" ref="key">{data.key}</label>
-        <div className="element-content-block">
-          <span className="aux-label">name</span>
+      <div styleName="pivot-setting-el-container" data-value={data.id}>
+        <label styleName="key-label" ref="key">{data.key}</label>
+        <div styleName="element-content-block">
+          <span styleName="aux-label">name</span>
           <input
-            className="measure-name"
+            styleName="measure-name"
             ref="name"
             defaultValue={data.name}
             onBlur={this.modifyMeasure}
@@ -88,4 +90,4 @@ MeasureElement.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-export default MeasureElement;
+export default CSSModles(MeasureElement, style);

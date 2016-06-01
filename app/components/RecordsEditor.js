@@ -1,4 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import CSSModules from 'react-css-modules';
+import FlatButton from 'material-ui/FlatButton';
+import baseStyle from '../styles/base.scss';
+import style from '../styles/records_editor.scss';
 
 class RecordsEditor extends Component {
   constructor(props) {
@@ -16,10 +21,18 @@ class RecordsEditor extends Component {
     const { recordString } = this.props.pivot;
 
     return (
-      <div>
-        <textarea className="records-editor" ref="records" defaultValue={recordString} />
-        <input type="button" value="change" onClick={this.handleEvent} />
-      </div>
+      <Card className={baseStyle['content-block']}>
+        <CardHeader
+          title="Records"
+          subtitle="records"
+        />
+        <CardText>
+          <textarea styleName="records-editor" ref="records" defaultValue={recordString} />
+        </CardText>
+        <CardActions>
+          <FlatButton label="Apply" onClick={this.handleEvent} />
+        </CardActions>
+      </Card>
     );
   }
 }
@@ -29,4 +42,4 @@ RecordsEditor.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-export default RecordsEditor;
+export default CSSModules(RecordsEditor, style);

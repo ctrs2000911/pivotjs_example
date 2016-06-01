@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import CSSModles from 'react-css-modules';
+import style from '../styles/sortable_list.scss';
 
 class SortableList extends Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class SortableList extends Component {
 
   componentDidMount() {
     this.placeholder = document.createElement('li');
-    this.placeholder.className = 'placeholder';
+    this.placeholder.className = style.placeholder;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,12 +76,12 @@ class SortableList extends Component {
   dragOver(e) {
     e.preventDefault();
 
-    if (this.dragged === null || e.target.className === 'placeholder') {
+    if (this.dragged === null || e.target.className === style.placeholder) {
       return;
     }
 
     this.over = e.target;
-    while (this.over.className !== 'sortable-list-el') {
+    while (this.over.className !== style['sortable-list-el']) {
       this.over = this.over.parentNode;
       if (this.over === window) {
         break;
@@ -107,7 +109,7 @@ class SortableList extends Component {
   renderListElement(element, index) {
     return (
       <li
-        className="sortable-list-el"
+        styleName="sortable-list-el"
         key={index}
         data-id={index}
         draggable="true"
@@ -121,7 +123,7 @@ class SortableList extends Component {
 
   render() {
     return (
-      <ul className="sortable-list" data-name={this.props.name} onDragOver={this.dragOver}>
+      <ul styleName="sortable-list" data-name={this.props.name} onDragOver={this.dragOver}>
         {this.state.data.map((...args) => this.renderListElement.apply(this, args))}
       </ul>
     );
@@ -134,4 +136,4 @@ SortableList.propTypes = {
   listElementRenderer: PropTypes.func,
 };
 
-export default SortableList;
+export default CSSModles(SortableList, style);

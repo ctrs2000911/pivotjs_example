@@ -1,10 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Card } from 'material-ui/Card';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import CSSModles from 'react-css-modules';
 import _ from 'lodash';
 import RowElement from './RowElement';
 import ColElement from './ColElement';
 import MeasureElement from './MeasureElement';
 import SortableList from './SortableList';
+import style from '../styles/base.scss';
 
 class PivotSetting extends Component {
   constructor(props) {
@@ -19,6 +25,11 @@ class PivotSetting extends Component {
     this.renderMeasureElement = this.renderMeasureElement.bind(this);
 
     this.measueItemPlaceChangedHandler = this.measueItemPlaceChangedHandler.bind(this);
+
+    this.style = {
+      padding: '16px',
+      width: '412px',
+    };
   }
 
   componentDidMount() {
@@ -48,9 +59,7 @@ class PivotSetting extends Component {
     }
   }
 
-  addRow() {
-    const id = this.refs.rowColumns.value;
-
+  addRow(event, index, id) {
     if (id === 'add') {
       return;
     }
@@ -67,9 +76,7 @@ class PivotSetting extends Component {
     this.props.actions.addRow(row);
   }
 
-  addCol() {
-    const id = this.refs.colColumns.value;
-
+  addCol(event, index, id) {
     if (id === 'add') {
       return;
     }
@@ -86,9 +93,7 @@ class PivotSetting extends Component {
     this.props.actions.addCol(col);
   }
 
-  addMeasure() {
-    const key = this.refs.measureColumns.value;
-
+  addMeasure(event, index, key) {
     if (key === 'add') {
       return;
     }
@@ -130,16 +135,16 @@ class PivotSetting extends Component {
     recordColumns = _.without(recordColumns, ...usedColumns);
 
     return (
-      <div className="pivot-setting-container">
-        <div className="pivot-setting-block">
-          <label className="pivot-setting-label">Measures:</label>
-          <select ref="measureColumns" value="add" onChange={this.addMeasure}>
-            <option key="add" value="add">add...</option>
+      <Card style={this.style}>
+        <div styleName="pivot-setting-block">
+          <label styleName="pivot-setting-label">Measures</label>
+          <DropDownMenu maxHeight={300} value="add" onChange={this.addMeasure}>
+            <MenuItem key="add" value="add" primaryText="add..." />
             {recordColumns.map(column =>
-              <option key={column} value={column}>{column}</option>
+              <MenuItem key={column} value={column} primaryText={column} />
             )}
-          </select>
-          <div className="pivot-setting-el-area">
+          </DropDownMenu>
+          <div styleName="pivot-setting-el-area">
             <SortableList
               name="measureList"
               data={pivot.measures}
@@ -148,15 +153,15 @@ class PivotSetting extends Component {
           </div>
         </div>
 
-        <div className="pivot-setting-block">
-          <label className="pivot-setting-label">Rows:</label>
-          <select ref="rowColumns" value="add" onChange={this.addRow}>
-            <option key="add" value="add">add...</option>
+        <div styleName="pivot-setting-block">
+          <label styleName="pivot-setting-label">Rows</label>
+          <DropDownMenu maxHeight={300} value="add" onChange={this.addRow}>
+            <MenuItem key="add" value="add" primaryText="add..." />
             {recordColumns.map(column =>
-              <option key={column} value={column}>{column}</option>
+              <MenuItem key={column} value={column} primaryText={column} />
             )}
-          </select>
-          <div className="pivot-setting-el-area">
+          </DropDownMenu>
+          <div styleName="pivot-setting-el-area">
             <SortableList
               name="rowList"
               data={pivot.rows}
@@ -165,19 +170,19 @@ class PivotSetting extends Component {
           </div>
         </div>
 
-        <div className="pivot-setting-block replace-rows-cols-button-block">
-          <button onClick={this.props.actions.replaceRowsWithCols}>Replace</button>
+        <div styleName="replace-rows-cols-button-block">
+          <RaisedButton label="Replace" onClick={this.props.actions.replaceRowsWithCols} />
         </div>
 
-        <div className="pivot-setting-block">
-          <label className="pivot-setting-label">Cols:</label>
-          <select ref="colColumns" value="add" onChange={this.addCol}>
-            <option key="add" value="add">add...</option>
+        <div styleName="pivot-setting-block">
+          <label styleName="pivot-setting-label">Cols</label>
+          <DropDownMenu maxHeight={300} value="add" onChange={this.addCol}>
+            <MenuItem key="add" value="add" primaryText="add..." />
             {recordColumns.map(column =>
-              <option key={column} value={column}>{column}</option>
+              <MenuItem key={column} value={column} primaryText={column} />
             )}
-          </select>
-          <div className="pivot-setting-el-area">
+          </DropDownMenu>
+          <div styleName="pivot-setting-el-area">
             <SortableList
               name="colList"
               data={pivot.cols}
@@ -185,7 +190,7 @@ class PivotSetting extends Component {
             />
           </div>
         </div>
-      </div>
+      </Card>
     );
   }
 }
@@ -195,4 +200,4 @@ PivotSetting.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-export default PivotSetting;
+export default CSSModles(PivotSetting, style);
