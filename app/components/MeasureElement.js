@@ -1,5 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModles from 'react-css-modules';
+import { Card } from 'material-ui/Card';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
 import style from '../styles/base.scss';
 
 class MeasureElement extends Component {
@@ -24,21 +30,37 @@ class MeasureElement extends Component {
       'min',
     ];
 
-    this.state = { key: props.data.key };
+    this.componentData = {
+      key: props.data.key,
+      name: props.data.name,
+      format: props.data.format,
+      aggregation: props.data.aggregation,
+    };
 
-    this.modifyMeasure = this.modifyMeasure.bind(this);
+    this.modifyName = this.modifyName.bind(this);
+    this.modifyFormat = this.modifyFormat.bind(this);
+    this.modifyAggregation = this.modifyAggregation.bind(this);
     this.removeMeasure = this.removeMeasure.bind(this);
   }
 
-  modifyMeasure() {
-    const newData = {
-      name: this.refs.name.value,
-      key: this.state.key,
-      format: this.refs.format.value,
-      aggregation: this.refs.aggregation.value,
-    };
+  modifyName() {
+    Object.assign(this.componentData, { name: this.refs.name.getValue() });
+    this.modifyMeasure();
+  }
 
-    const data = Object.assign({}, this.props.data, newData);
+  modifyFormat(event, index, format) {
+    Object.assign(this.componentData, { format });
+    this.modifyMeasure();
+  }
+
+  modifyAggregation(event, index, aggregation) {
+    Object.assign(this.componentData, { aggregation });
+    this.modifyMeasure();
+  }
+
+  modifyMeasure() {
+    const data = Object.assign({}, this.props.data, this.componentData);
+
     this.props.actions.modifyMeasure(data);
   }
 
@@ -49,38 +71,60 @@ class MeasureElement extends Component {
 
 
   renderFormatOptions() {
-    return this.formats.map((format) => <option key={format} value={format}>{format}</option>);
+    return this.formats.map(format =>
+      <MenuItem key={format} value={format} primaryText={format} />
+    );
   }
 
   renderAggregationOptions() {
-    return this.aggregations.map((agg) => <option key={agg} value={agg}>{agg}</option>);
+    return this.aggregations.map(agg =>
+      <MenuItem key={agg} value={agg} primaryText={agg} />
+    );
   }
 
   render() {
     const data = this.props.data;
 
     return (
-      <div styleName="pivot-setting-el-container" data-value={data.id}>
-        <label styleName="key-label" ref="key">{data.key}</label>
-        <div styleName="element-content-block">
-          <span styleName="aux-label">name</span>
-          <input
-            styleName="measure-name"
-            ref="name"
-            defaultValue={data.name}
-            onBlur={this.modifyMeasure}
-          />
-          <select ref="format" value={data.format} onChange={this.modifyMeasure}>
-            {this.renderFormatOptions()}
-          </select>
-          <select ref="aggregation" value={data.aggregation} onChange={this.modifyMeasure}>
-            {this.renderAggregationOptions()}
-          </select>
+      <Card styleName="dimension-element-container" data-value={data.id}>
+        <div styleName="pivot-setting-el-container">
+          <label styleName="key-label" ref="key">{data.key}</label>
+          <div styleName="element-content-block">
+            <TextField
+              ref="name"
+              hintText="Name"
+              defaultValue={this.componentData.name}
+              floatingLabelText="Name"
+              onBlur={this.modifyName}
+            />
+            <SelectField
+              ref="format"
+              value={this.componentData.format}
+              floatingLabelText="Format"
+              onChange={this.modifyFormat}
+            >
+              {this.renderFormatOptions()}
+            </SelectField>
+            <SelectField
+              ref="aggregation"
+              value={this.componentData.aggregation}
+              floatingLabelText="aggregation"
+              onChange={this.modifyAggregation}
+            >
+              {this.renderAggregationOptions()}
+            </SelectField>
+          </div>
+          <div>
+            <IconButton
+              value={data.id}
+              tooltip="delete measure"
+              onClick={this.removeMeasure}
+            >
+              <ActionDelete />
+            </IconButton>
+          </div>
         </div>
-        <div>
-          <button value={data.id} onClick={this.removeMeasure}>X</button>
-        </div>
-      </div>
+      </Card>
     );
   }
 }

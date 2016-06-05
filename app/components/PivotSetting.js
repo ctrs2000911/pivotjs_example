@@ -27,8 +27,10 @@ class PivotSetting extends Component {
     this.measueItemPlaceChangedHandler = this.measueItemPlaceChangedHandler.bind(this);
 
     this.style = {
-      padding: '16px',
-      width: '412px',
+      padding: 16,
+      width: 412,
+      maxHeight: 500,
+      overflowY: 'scroll',
     };
   }
 
@@ -137,9 +139,8 @@ class PivotSetting extends Component {
     return (
       <Card style={this.style}>
         <div styleName="pivot-setting-block">
-          <label styleName="pivot-setting-label">Measures</label>
           <DropDownMenu maxHeight={300} value="add" onChange={this.addMeasure}>
-            <MenuItem key="add" value="add" primaryText="add..." />
+            <MenuItem key="add" value="add" primaryText="Add Measure ..." />
             {recordColumns.map(column =>
               <MenuItem key={column} value={column} primaryText={column} />
             )}
@@ -154,9 +155,8 @@ class PivotSetting extends Component {
         </div>
 
         <div styleName="pivot-setting-block">
-          <label styleName="pivot-setting-label">Rows</label>
           <DropDownMenu maxHeight={300} value="add" onChange={this.addRow}>
-            <MenuItem key="add" value="add" primaryText="add..." />
+            <MenuItem key="add" value="add" primaryText="Add Row ..." />
             {recordColumns.map(column =>
               <MenuItem key={column} value={column} primaryText={column} />
             )}
@@ -175,9 +175,8 @@ class PivotSetting extends Component {
         </div>
 
         <div styleName="pivot-setting-block">
-          <label styleName="pivot-setting-label">Cols</label>
           <DropDownMenu maxHeight={300} value="add" onChange={this.addCol}>
-            <MenuItem key="add" value="add" primaryText="add..." />
+            <MenuItem key="add" value="add" primaryText="Add Col..." />
             {recordColumns.map(column =>
               <MenuItem key={column} value={column} primaryText={column} />
             )}

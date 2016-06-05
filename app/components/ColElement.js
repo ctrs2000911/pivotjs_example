@@ -1,5 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModles from 'react-css-modules';
+import { Card } from 'material-ui/Card';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
 import _ from 'lodash';
 import SortKeySelect from './SortKeySelect';
 import style from '../styles/base.scss';
@@ -13,22 +18,41 @@ class ColElement extends Component {
       { label: 'decending', value: false },
     ];
 
-    this.state = { id: props.data.id };
+    this.componentData = {
+      id: props.data.id,
+      type: 'self',
+      ascending: true,
+      meausreIndex: null,
+    };
 
-    this.modifyCol = this.modifyCol.bind(this);
+    this.modifyType = this.modifyType.bind(this);
+    this.modifyAscedning = this.modifyAscedning.bind(this);
     this.removeCol = this.removeCol.bind(this);
     this.updateSortKey = this.updateSortKey.bind(this);
   }
 
-  modifyCol() {
-    const type = this.refs.type.value === 'self' ? 'self' : 'measure';
-    const ascending = this.refs.sortOrder.value === 'true';
+  modifyType(event, index, id) {
+    const type = id === 'self' ? 'self' : 'measure';
     const measureIndex = type === 'measure'
-      ? _.findIndex(this.props.pivot.measures, measure => measure.id === this.refs.type.value)
+      ? _.findIndex(this.props.pivot.measures, measure => measure.id === id)
       : null;
 
+    Object.assign(this.componentData, { type, measureIndex });
+    this.modifyCol();
+  }
+
+  modifyAscedning(event, index, bool) {
+    const ascending = bool === true;
+
+    Object.assign(this.componentData, { ascending });
+    this.modifyCol();
+  }
+
+  modifyCol() {
+    const { type, ascending, measureIndex } = this.componentData;
+
     const newData = {
-      id: this.state.id,
+      id: this.componentData.id,
       sort: {
         type,
         key: this.props.data.sort.key,
@@ -57,19 +81,24 @@ class ColElement extends Component {
     this.props.actions.modifyCol(data);
   }
 
-  renderSortOrders() {
+  renderSortOrderOptions() {
     return this.sortOrders.map(sortOrder =>
-      <option key={sortOrder.value} value={sortOrder.value}>{sortOrder.label}</option>
+      <MenuItem key={sortOrder.value} value={sortOrder.value} primaryText={sortOrder.label} />
     );
   }
 
   renderTypeOptions() {
-    const options = [<option key="self" value="self">Self</option>];
+    const options = [<MenuItem key="self" value="self" primaryText="Self" />];
 
     const measures = this.props.pivot.measures;
     measures.forEach((measure, index) =>
       options.push(
-        <option key={measure.id} value={measure.id} data-index={index}>{measure.name}</option>
+        <MenuItem
+          key={measure.id}
+          value={measure.id}
+          data-index={index}
+          primaryText={measure.name}
+        />
       )
     );
 
@@ -78,10 +107,10 @@ class ColElement extends Component {
 
   renderSortKeySelect() {
     const { pivot, data } = this.props;
-    return this.props.data.sort.type !== 'self'
+
+    return this.componentData.type !== 'self'
       ?
       <div styleName="sort-key-area">
-        <span styleName="aux-label">sort key</span>
         <SortKeySelect
           pivot={pivot}
           direction="row"
@@ -95,34 +124,48 @@ class ColElement extends Component {
   render() {
     const { data } = this.props;
 
-    const typeDefaultValue = data.sort.type === 'self'
+    const typeDefaultValue = this.componentData.type === 'self'
       ? 'self'
       : this.props.pivot.measures[data.sort.measureIndex].id;
 
     return (
-      <div styleName="pivot-setting-el-container" data-value={data.id}>
-        <label styleName="key-label" ref="id">{data.id}</label>
-        <div styleName="element-content-block">
-          <div styleName="element-content-area">
-            <span styleName="aux-label">sort by</span>
-            <select
-              styleName="sort-type"
-              ref="type"
-              defaultValue={typeDefaultValue}
-              onChange={this.modifyCol}
-            >
-              {this.renderTypeOptions()}
-            </select>
-            <select ref="sortOrder" defaultValue={data.sort.ascending} onChange={this.modifyCol}>
-              {this.renderSortOrders()}
-            </select>
+      <Card styleName="dimension-element-container" data-value={data.id}>
+        <div styleName="pivot-setting-el-container">
+          <label styleName="key-label" ref="id">{data.id}</label>
+          <div styleName="element-content-block">
+            <div styleName="element-content-area">
+              <SelectField
+                ref="sortOrder"
+                maxHeight={300}
+                value={this.componentData.ascending}
+                floatingLabelText="Sort order"
+                onChange={this.modifyAscedning}
+              >
+                {this.renderSortOrderOptions()}
+              </SelectField>
+              <SelectField
+                ref="type"
+                maxHeight={300}
+                value={typeDefaultValue}
+                floatingLabelText="Sort by"
+                onChange={this.modifyType}
+              >
+                {this.renderTypeOptions()}
+              </SelectField>
+            </div>
+            {this.renderSortKeySelect()}
           </div>
-          {this.renderSortKeySelect()}
+          <div>
+            <IconButton
+              value={data.id}
+              tooltip="delete col"
+              onClick={this.removeCol}
+            >
+              <ActionDelete />
+            </IconButton>
+          </div>
         </div>
-        <div>
-          <button value={data.id} onClick={this.removeCol}>X</button>
-        </div>
-      </div>
+      </Card>
     );
   }
 }

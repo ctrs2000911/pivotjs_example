@@ -44,6 +44,10 @@ body {
   padding: 2px;
 }
 
+.dimension-element-container {
+  padding: 5px;
+}
+
 .pivot-setting-el-container {
   align-items: center;
   display: flex;
@@ -75,10 +79,6 @@ body {
     max-width: 140px;
   }
 
-  .sort-key {
-    max-width: 60px;
-  }
-
   .element-content-block {
     width: 280px;
   }
@@ -90,6 +90,7 @@ body {
   .sort-key-area {
     @include  element-content-area;
     background-color: rgba(0, 0, 0, .03);
+    margin-left: 10px;
     margin-top: 2px;
   }
 }

@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModles from 'react-css-modules';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import _ from 'lodash';
 import style from '../styles/base.scss';
 
@@ -10,9 +12,9 @@ class SortKeySelect extends Component {
     this.changeKey = this.changeKey.bind(this);
   }
 
-  changeKey(event) {
-    const key = event.target.value;
-    const depth = parseInt(event.target.getAttribute('data-depth'), 10);
+  changeKey(event, index, id) {
+    const key = id;
+    const depth = event.currentTarget.getAttribute('data-depth');
     const data = Object.assign([], this.props.data);
     const removeCount = data.length - depth;
 
@@ -24,22 +26,29 @@ class SortKeySelect extends Component {
     let options = [];
     if (keyObject.children && keyObject.children.length > 0) {
       options = keyObject.children.map(obj =>
-        <option key={obj.key} value={obj.key}>{obj.key}</option>
+        <MenuItem
+          key={obj.key}
+          value={obj.key}
+          data-depth={keyObject.depth}
+          primaryText={obj.key}
+        />
       );
     }
 
+    const floatingLabelText = keyObject.depth === 0 ? 'Sort key' : null;
+
     return (
-      <select
-        styleName="sort-key"
+      <SelectField
         key={keyObject.key}
         ref={keyObject.depth}
         data-depth={keyObject.depth}
         value={key}
+        floatingLabelText={floatingLabelText}
         onChange={this.changeKey}
       >
-        <option key="total" value="Total">Total</option>
+        <MenuItem key="total" value="Total" data-depth={keyObject.depth} primaryText="Total" />
         {options}
-      </select>
+      </SelectField>
     );
   }
 
@@ -87,10 +96,6 @@ SortKeySelect.propTypes = {
   data: PropTypes.array.isRequired,
   direction: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired,
-};
-
-SortKeySelect.initialState = {
-  keys: [],
 };
 
 export default CSSModles(SortKeySelect, style);

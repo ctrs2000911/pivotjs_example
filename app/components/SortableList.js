@@ -81,7 +81,7 @@ class SortableList extends Component {
     }
 
     this.over = e.target;
-    while (this.over.className !== style['sortable-list-el']) {
+    while (this.over.className !== 'sortable-list-el') {
       this.over = this.over.parentNode;
       if (this.over === window) {
         break;
@@ -91,7 +91,7 @@ class SortableList extends Component {
     const parent = this.over.parentNode;
 
     const diff = e.clientY - this.over.offsetTop;
-    const height = (this.over.offsetHeight - 10) / 2;
+    const height = this.over.offsetHeight / 2;
 
     if (diff > height) {
       this.nodePlacement = 'after';
@@ -109,7 +109,7 @@ class SortableList extends Component {
   renderListElement(element, index) {
     return (
       <li
-        styleName="sortable-list-el"
+        className="sortable-list-el"
         key={index}
         data-id={index}
         draggable="true"
