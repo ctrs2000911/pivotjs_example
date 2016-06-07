@@ -19,7 +19,7 @@ module.exports = [
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
-      new ExtractTextPlugin('test.css', { allChunks: true }),
+      new ExtractTextPlugin('style.css', { allChunks: true }),
     ],
     module: {
       loaders: [

@@ -10,7 +10,7 @@ class PivotTable extends Component {
   constructor(props) {
     super(props);
 
-    this.style = {
+    this.containerStyle = {
       overflow: 'auto',
       padding: '16px',
       width: 'calc(100% - 412px)',
@@ -62,14 +62,14 @@ class PivotTable extends Component {
       .enter()
         .append('tr')
         .attr({
-          class: `${style['pivot-row']}`,
+          class: `${style['pivot-col-label']}`,
         })
         .selectAll('tr')
         .data(d => d.caption.concat(d.colKey))
         .enter()
           .append('th')
           .attr({
-            class: d => d.style,
+            class: d => style[d.style],
             colspan: d => d.colspan,
             rowspan: d => d.rowspan,
           })
@@ -81,7 +81,7 @@ class PivotTable extends Component {
       .enter()
         .append('tr')
         .attr({
-          class: `${style['pivot-row']}`,
+          class: `${style['pivot-row-label']}`,
         });
 
     tbodyTr.selectAll('tr')
@@ -89,7 +89,7 @@ class PivotTable extends Component {
       .enter()
         .append('th')
         .attr({
-          class: d => d.style,
+          class: d => style[d.style],
           rowspan: d => d.rowspan,
           colspan: d => (d.colspan === 1 ? null : d.colspan),
         })
@@ -108,7 +108,7 @@ class PivotTable extends Component {
 
   render() {
     return (
-      <Card style={this.style}>
+      <Card style={this.containerStyle}>
         <div ref="pivotTable" />
       </Card>
     );
