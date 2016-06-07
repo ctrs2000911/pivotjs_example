@@ -1,0 +1,135 @@
+html,
+body {
+  background-color: #e9e9e9;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  padding: 0; }
+
+.base__pivot-block___2TkDD {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row; }
+
+.base__pivot-setting-block___D4I8r {
+  margin-bottom: 10px; }
+  .base__pivot-setting-block___D4I8r:last-child {
+    margin-bottom: 0; }
+  .base__pivot-setting-block___D4I8r .base__pivot-setting-label___10lmn {
+    font-size: 14px;
+    margin-right: 6px; }
+  .base__pivot-setting-block___D4I8r .base__pivot-setting-el-area___2vdVS {
+    margin: 10px; }
+
+.base__replace-rows-cols-button-block___2bjfd {
+  margin-bottom: 10px;
+  text-align: center; }
+
+.base__dimension-element-container___3S_yr {
+  padding: 5px; }
+
+.base__pivot-setting-el-container___1Lfov {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+  .base__pivot-setting-el-container___1Lfov .base__key-label___13auR {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 6px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 50px; }
+  .base__pivot-setting-el-container___1Lfov .base__aux-label___2l2BM {
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 4px; }
+  .base__pivot-setting-el-container___1Lfov .base__measure-name___18zRP {
+    margin-right: 4px;
+    width: 70px; }
+  .base__pivot-setting-el-container___1Lfov .base__sort-type___3ojFn {
+    max-width: 140px; }
+  .base__pivot-setting-el-container___1Lfov .base__element-content-block___3F2FD {
+    width: 280px; }
+  .base__pivot-setting-el-container___1Lfov .base__element-content-area___3xJg1 {
+    padding: 2px; }
+  .base__pivot-setting-el-container___1Lfov .base__sort-key-area___YSRRJ {
+    padding: 2px;
+    background-color: rgba(0, 0, 0, 0.03);
+    margin-left: 10px;
+    margin-top: 2px; }
+
+.base__content-container___2eOTt {
+  font-size: 12px; }
+  .base__content-container___2eOTt .base__content-block___1itq1:not(:last-child) {
+    margin-bottom: 10px; }
+.records_editor__records-editor___b-6Dk {
+  height: 300px;
+  width: 100%; }
+.chart_options__container___1f7UY {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.chart_options__checkbox___acZex {
+  max-width: 250px; }
+.sortable_list__sortable-list___1czv0 {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+li.sortable_list__placeholder___32khy {
+  background: #fff078; }
+
+li.sortable_list__placeholder___32khy:before {
+  color: #e1d25a;
+  content: '';
+  display: block;
+  height: 4px; }
+.pivot_table__argus-table___1yxrE {
+  background-color: #fff;
+  border-collapse: collapse;
+  width: 100%; }
+  .pivot_table__argus-table___1yxrE th,
+  .pivot_table__argus-table___1yxrE td {
+    font-size: 12px;
+    padding: 4px; }
+  .pivot_table__argus-table___1yxrE th {
+    background-color: #f3f3f3;
+    border: 1px solid #ddd; }
+  .pivot_table__argus-table___1yxrE td {
+    text-align: right; }
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-row-label___38Vl9,
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-col-total-label___3z8zY {
+    text-align: right; }
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-col-label___gr-KP,
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-measure-label___3KCzz,
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-row-total-label___1ELr8 {
+    text-align: center; }
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-grand-total___e4W36,
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-total-val___3m1qA {
+    font-weight: bold; }
+
+.pivot_table__table-bordered___1a-J_ {
+  border: 1px solid #ddd; }
+  .pivot_table__table-bordered___1a-J_ > thead > tr > th,
+  .pivot_table__table-bordered___1a-J_ > tbody > tr > th,
+  .pivot_table__table-bordered___1a-J_ > tfoot > tr > th,
+  .pivot_table__table-bordered___1a-J_ > thead > tr > td,
+  .pivot_table__table-bordered___1a-J_ > tbody > tr > td,
+  .pivot_table__table-bordered___1a-J_ > tfoot > tr > td {
+    border: 1px solid #ddd; }
+  .pivot_table__table-bordered___1a-J_ > thead > tr > th,
+  .pivot_table__table-bordered___1a-J_ > thead > tr > td {
+    border-bottom-width: 2px; }
