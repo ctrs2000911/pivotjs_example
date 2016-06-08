@@ -1,19 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
 import CSSModules from 'react-css-modules';
 import FlatButton from 'material-ui/FlatButton';
-import baseStyle from '../styles/base.scss';
-import style from '../styles/records_editor.scss';
+import style from '../styles/base.scss';
 
 class RecordsEditor extends Component {
   constructor(props) {
     super(props);
 
+    this.textFieldStyle = {
+      width: '100%',
+    };
+
     this.handleEvent = this.handleEvent.bind(this);
   }
 
   handleEvent() {
-    const records = this.refs.records.value || '[]';
+    const records = this.refs.records.getValue() || '[]';
     this.props.actions.changeRecords(records);
   }
 
@@ -21,13 +25,20 @@ class RecordsEditor extends Component {
     const { recordString } = this.props.pivot;
 
     return (
-      <Card className={baseStyle['content-block']}>
+      <Card styleName="content-block">
         <CardHeader
-          title="Records"
-          subtitle="records"
+          title="Records(JSON)"
         />
         <CardText>
-          <textarea styleName="records-editor" ref="records" defaultValue={recordString} />
+          <TextField
+            id="records"
+            ref="records"
+            defaultValue={recordString}
+            multiLine
+            rows={10}
+            rowsMax={15}
+            style={this.textFieldStyle}
+          />
         </CardText>
         <CardActions>
           <FlatButton label="Apply" onClick={this.handleEvent} />
