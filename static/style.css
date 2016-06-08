@@ -74,9 +74,6 @@ body {
   font-size: 12px; }
   .base__content-container___2eOTt .base__content-block___1itq1:not(:last-child) {
     margin-bottom: 10px; }
-.records_editor__records-editor___b-6Dk {
-  height: 300px;
-  width: 100%; }
 .chart_options__container___1f7UY {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -110,6 +107,8 @@ li.sortable_list__placeholder___32khy:before {
     border: 1px solid #ddd; }
   .pivot_table__argus-table___1yxrE td {
     text-align: right; }
+  .pivot_table__argus-table___1yxrE .pivot_table__pivot-val___TwKd7 {
+    font-weight: normal; }
   .pivot_table__argus-table___1yxrE .pivot_table__pivot-row-label___38Vl9,
   .pivot_table__argus-table___1yxrE .pivot_table__pivot-col-total-label___3z8zY {
     text-align: right; }
