@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 .argus-table {
   background-color: #fff;
   border-collapse: collapse;
@@ -20,6 +18,10 @@
     text-align: right;
   }
 
+  .pivot-val {
+    font-weight: normal;
+  }
+
   .pivot-row-label,
   .pivot-col-total-label {
     text-align: right;
@@ -38,7 +40,7 @@
 }
 
 .table-bordered {
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
 
   & > thead > tr > th,
   & > tbody > tr > th,
@@ -46,7 +48,7 @@
   & > thead > tr > td,
   & > tbody > tr > td,
   & > tfoot > tr > td {
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
   }
 
   & > thead > tr > th,

@@ -1,0 +1,105 @@
+html,
+body {
+  background-color: #e9e9e9;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  padding: 0;
+}
+
+.pivot-block {
+  display: flex;
+  flex-direction: row;
+}
+
+
+@mixin pivot-setting-block {
+  margin-bottom: 10px;
+}
+
+.pivot-setting-block {
+  @include pivot-setting-block;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .pivot-setting-label {
+    font-size: 14px;
+    // font-weight: 600;
+    margin-right: 6px;
+  }
+
+  .pivot-setting-el-area {
+    margin: 10px;
+  }
+}
+
+.replace-rows-cols-button-block {
+  @include pivot-setting-block;
+  text-align: center;
+}
+
+@mixin element-content-area {
+  padding: 2px;
+}
+
+.dimension-element-container {
+  padding: 5px;
+}
+
+.pivot-setting-el-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  .key-label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 6px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 50px;
+  }
+
+  .aux-label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 4px;
+  }
+
+  .measure-name {
+    margin-right: 4px;
+    width: 70px;
+  }
+
+  .sort-type {
+    max-width: 140px;
+  }
+
+  .element-content-block {
+    width: 280px;
+  }
+
+  .element-content-area {
+    @include element-content-area;
+  }
+
+  .sort-key-area {
+    @include  element-content-area;
+    background-color: rgba(0, 0, 0, .03);
+    margin-left: 10px;
+    margin-top: 2px;
+  }
+}
+
+
+.content-container {
+  font-size: 12px;
+
+  .content-block:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
