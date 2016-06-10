@@ -38,13 +38,15 @@ class TableData {
           const child = func(data, index === 0 ? rowKey : [], Object.assign([], fullRowKey));
           rowspan += (child.rowspan || 1);
 
-          if (this.options.showSubTotal && child.colspan !== 2) {
+          if (this.options.showSubTotal
+            && prowAttrs[data.depth - 1].showSubTotal === true
+            && child.colspan !== 2) {
             rowspan ++;
           }
         });
 
         // total of row key
-        if (this.options.showSubTotal) {
+        if (this.options.showSubTotal && prowAttrs[dataset.depth - 1].showSubTotal === true) {
           rows.push({
             rowKey: [{
               key: `Total of ${dataset.key}`,

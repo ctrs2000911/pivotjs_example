@@ -13,7 +13,7 @@ class ChartOptions extends Component {
         <CardText>
           <div styleName="container">
             <Checkbox
-              label="Show Sub Total"
+              label="Show Subtotal"
               styleName="checkbox"
               checked={chartOptions.showSubTotal}
               onCheck={actions.changeShowSubTotal}
