@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModles from 'react-css-modules';
 import { Card } from 'material-ui/Card';
+import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
@@ -27,6 +28,7 @@ class RowElement extends Component {
 
     this.modifyType = this.modifyType.bind(this);
     this.modifyAscedning = this.modifyAscedning.bind(this);
+    this.modifyShowSubTotal = this.modifyShowSubTotal.bind(this);
     this.removeRow = this.removeRow.bind(this);
     this.updateSortKey = this.updateSortKey.bind(this);
   }
@@ -48,11 +50,17 @@ class RowElement extends Component {
     this.modifyRow();
   }
 
+  modifyShowSubTotal(event, showSubTotal) {
+    Object.assign(this.componentData, { showSubTotal });
+    this.modifyRow();
+  }
+
   modifyRow() {
-    const { type, ascending, measureIndex } = this.componentData;
+    const { type, ascending, measureIndex, showSubTotal } = this.componentData;
 
     const newData = {
       id: this.componentData.id,
+      showSubTotal,
       sort: {
         type,
         key: this.props.data.sort.key,
@@ -154,6 +162,11 @@ class RowElement extends Component {
               </SelectField>
             </div>
             {this.renderSortKeySelect()}
+            <Checkbox
+              label="Show Subtotal"
+              checked={data.showSubTotal}
+              onCheck={this.modifyShowSubTotal}
+            />
           </div>
           <div>
             <IconButton

@@ -73,8 +73,9 @@ class PivotSetting extends Component {
       ascending: true,
     };
 
-    const row = { id, sort };
+    const showSubTotal = true;
 
+    const row = { id, showSubTotal, sort };
     this.props.actions.addRow(row);
   }
 
