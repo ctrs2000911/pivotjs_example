@@ -21,9 +21,10 @@ class RowElement extends Component {
 
     this.componentData = {
       id: props.data.id,
-      type: 'self',
-      ascending: true,
-      meausreIndex: null,
+      showSubTotal: props.data.showSubTotal,
+      type: props.data.sort.type,
+      ascending: props.data.sort.ascending,
+      meausreIndex: props.data.sort.meausreIndex,
     };
 
     this.modifyType = this.modifyType.bind(this);
