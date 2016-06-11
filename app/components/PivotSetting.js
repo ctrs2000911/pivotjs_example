@@ -29,7 +29,7 @@ class PivotSetting extends Component {
     this.style = {
       padding: 16,
       width: 412,
-      maxHeight: 500,
+      maxHeight: 1000,
       overflowY: 'scroll',
     };
   }

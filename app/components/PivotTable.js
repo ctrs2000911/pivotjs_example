@@ -13,6 +13,7 @@ class PivotTable extends Component {
     this.containerStyle = {
       overflow: 'auto',
       padding: '16px',
+      maxHeight: 1000,
       width: 'calc(100% - 412px)',
     };
   }
