@@ -6,14 +6,17 @@ body {
   height: 100%;
   padding: 0; }
 
-.base__pivot-block___2TkDD {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row; }
+.base__pivot-block-container___rai2k {
+  max-height: 1000px; }
+  .base__pivot-block-container___rai2k .base__pivot-block___2TkDD {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 100%; }
 
 .base__pivot-setting-block___D4I8r {
   margin-bottom: 10px; }
