@@ -14,8 +14,8 @@ class ColElement extends Component {
     super(props);
 
     this.sortOrders = [
-      { label: 'ascending', value: true },
-      { label: 'decending', value: false },
+      { label: 'ascending', value: 'ascending' },
+      { label: 'descending', value: 'descending' },
     ];
 
     this.componentData = {
@@ -41,8 +41,8 @@ class ColElement extends Component {
     this.modifyCol();
   }
 
-  modifyAscedning(event, index, bool) {
-    const ascending = bool === true;
+  modifyAscedning(event, index, value) {
+    const ascending = value === 'ascending';
 
     Object.assign(this.componentData, { ascending });
     this.modifyCol();
@@ -127,6 +127,7 @@ class ColElement extends Component {
     const typeDefaultValue = this.componentData.type === 'self'
       ? 'self'
       : this.props.pivot.measures[data.sort.measureIndex].id;
+    const ascendingValue = this.componentData.ascending === true ? 'ascending' : 'descending';
 
     return (
       <Card styleName="dimension-element-container" data-value={data.id}>
@@ -137,7 +138,7 @@ class ColElement extends Component {
               <SelectField
                 ref="sortOrder"
                 maxHeight={300}
-                value={this.componentData.ascending}
+                value={ascendingValue}
                 floatingLabelText="Sort order"
                 onChange={this.modifyAscedning}
               >

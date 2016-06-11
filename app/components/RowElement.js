@@ -15,8 +15,8 @@ class RowElement extends Component {
     super(props);
 
     this.sortOrders = [
-      { label: 'ascending', value: true },
-      { label: 'decending', value: false },
+      { label: 'ascending', value: 'ascending' },
+      { label: 'descending', value: 'descending' },
     ];
 
     this.componentData = {
@@ -43,8 +43,8 @@ class RowElement extends Component {
     this.modifyRow();
   }
 
-  modifyAscedning(event, index, bool) {
-    const ascending = bool === true;
+  modifyAscedning(event, index, value) {
+    const ascending = value === 'ascending';
 
     Object.assign(this.componentData, { ascending });
     this.modifyRow();
@@ -135,7 +135,7 @@ class RowElement extends Component {
     const typeDefaultValue = this.componentData.type === 'self'
       ? 'self'
       : this.props.pivot.measures[this.componentData.measureIndex].id;
-
+    const ascendingValue = this.componentData.ascending === true ? 'ascending' : 'descending';
     const showSubtoltalDisabled = !chartOptions.showSubTotal;
 
     return (
@@ -147,7 +147,7 @@ class RowElement extends Component {
               <SelectField
                 ref="sortOrder"
                 maxHeight={300}
-                value={this.componentData.ascending}
+                value={ascendingValue}
                 floatingLabelText="Sort order"
                 onChange={this.modifyAscedning}
               >
