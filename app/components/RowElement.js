@@ -130,11 +130,13 @@ class RowElement extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, chartOptions } = this.props;
 
     const typeDefaultValue = this.componentData.type === 'self'
       ? 'self'
       : this.props.pivot.measures[this.componentData.measureIndex].id;
+
+    const showSubtoltalDisabled = !chartOptions.showSubTotal;
 
     return (
       <Card styleName="dimension-element-container" data-value={data.id}>
@@ -166,6 +168,7 @@ class RowElement extends Component {
               label="Show Subtotal"
               checked={data.showSubTotal}
               onCheck={this.modifyShowSubTotal}
+              disabled={showSubtoltalDisabled}
             />
           </div>
           <div>
@@ -186,6 +189,7 @@ class RowElement extends Component {
 RowElement.propTypes = {
   data: PropTypes.object.isRequired,
   pivot: PropTypes.object.isRequired,
+  chartOptions: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 

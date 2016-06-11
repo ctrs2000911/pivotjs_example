@@ -114,8 +114,7 @@ class PivotSetting extends Component {
   }
 
   renderRowElement(row) {
-    const { pivot, actions } = this.props;
-    return <RowElement key={row.id} data={row} pivot={pivot} actions={actions} />;
+    return <RowElement key={row.id} data={row} {...this.props} />;
   }
 
   renderColElement(col) {
@@ -197,6 +196,7 @@ class PivotSetting extends Component {
 
 PivotSetting.propTypes = {
   pivot: PropTypes.object.isRequired,
+  chartOptions: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 

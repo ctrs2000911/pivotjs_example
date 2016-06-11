@@ -25,7 +25,7 @@ class App extends Component {
           <Card>
             <div styleName="pivot-block">
               <PivotTable pivot={pivot} chartOptions={chartOptions} />
-              <PivotSetting pivot={pivot} actions={actions} />
+              <PivotSetting pivot={pivot} chartOptions={chartOptions} actions={actions} />
             </div>
           </Card>
         </Card>
