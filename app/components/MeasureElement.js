@@ -65,7 +65,7 @@ class MeasureElement extends Component {
   }
 
   removeMeasure(event) {
-    const id = event.target.value;
+    const id = event.currentTarget.value;
     this.props.actions.removeMeasure(id);
   }
 

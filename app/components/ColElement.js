@@ -66,7 +66,7 @@ class ColElement extends Component {
   }
 
   removeCol(event) {
-    const id = event.target.value;
+    const id = event.currentTarget.value;
     this.props.actions.removeCol(id);
   }
 
