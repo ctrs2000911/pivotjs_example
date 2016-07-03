@@ -20,6 +20,8 @@
     "material-ui": "0.15.0",
     "pivotjs": "0.0.1",
     "react-redux": "4.4.5",
+    "react-router": "2.5.1",
+    "react-router-redux": "4.0.5",
     "redux": "3.5.2"
   },
   "devDependencies": {
