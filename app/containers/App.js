@@ -12,11 +12,11 @@ import style from '../styles/base.scss';
 
 class App extends Component {
   render() {
-    const { pivot, chartOptions, actions } = this.props;
+    const { pivot, chartOptions, actions, params } = this.props;
 
     return (
       <div styleName="content-container">
-        <RecordsEditor pivot={pivot} actions={actions} />
+        <RecordsEditor pivot={pivot} actions={actions} params={params} />
         <Card styleName="content-block">
           <CardHeader
             title="Pivot Table"
@@ -38,6 +38,7 @@ App.propTypes = {
   pivot: PropTypes.object.isRequired,
   chartOptions: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  params: PropTypes.object,
 };
 
 App.defaultProps = {

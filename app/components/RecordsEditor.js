@@ -3,6 +3,7 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import CSSModules from 'react-css-modules';
 import FlatButton from 'material-ui/FlatButton';
+import RecordData from '../logic/RecordData';
 import style from '../styles/base.scss';
 
 class RecordsEditor extends Component {
@@ -13,7 +14,28 @@ class RecordsEditor extends Component {
       width: '100%',
     };
 
+    this.state = {
+      records: '[]',
+    };
+
     this.handleEvent = this.handleEvent.bind(this);
+    this.changeEvent = this.changeEvent.bind(this);
+  }
+
+  componentWillMount() {
+    const id = parseInt(this.props.params.id, 10);
+
+    const recordData = new RecordData();
+    const records = recordData.getAt(id);
+
+    this.setState({ records });
+    this.props.actions.changeRecords(records);
+  }
+
+  changeEvent(e) {
+    this.setState({
+      records: e.target.value,
+    });
   }
 
   handleEvent() {
@@ -22,8 +44,6 @@ class RecordsEditor extends Component {
   }
 
   render() {
-    const { recordString } = this.props.pivot;
-
     return (
       <Card styleName="content-block">
         <CardHeader
@@ -33,11 +53,12 @@ class RecordsEditor extends Component {
           <TextField
             id="records"
             ref="records"
-            defaultValue={recordString}
+            defaultValue={this.state.records}
             multiLine
             rows={10}
             rowsMax={15}
             style={this.textFieldStyle}
+            onChange={this.handleChange}
           />
         </CardText>
         <CardActions>
@@ -51,6 +72,7 @@ class RecordsEditor extends Component {
 RecordsEditor.propTypes = {
   pivot: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  params: PropTypes.object,
 };
 
 export default CSSModules(RecordsEditor, style);

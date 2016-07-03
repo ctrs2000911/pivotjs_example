@@ -21,7 +21,7 @@ function render() {
     <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Provider store={store}>
         <Router history={history}>
-          <Route path="/" component={App} />
+          <Route path="/:id" component={App} />
         </Router>
       </Provider>
     </MuiThemeProvider>
@@ -31,9 +31,3 @@ function render() {
 }
 
 render();
-
-// store.subscribe(() => {
-//   const state = store.getState();
-//   const dataset = state.dataset;
-//   console.log(state, dataset);
-// });
