@@ -36,6 +36,18 @@ class PivotTable extends Component {
       return;
     }
 
+    d3.select(ReactDOM.findDOMNode(this.refs.pivotTable))
+      .selectAll('*')
+      .remove();
+
+    if (this.props.pivot.measures.length === 0) {
+      this.renderNoMeasureMessage();
+    } else {
+      this.renderPivotTable();
+    }
+  }
+
+  renderPivotTable() {
     const pivotTable
       = new TableData(this.props.pivot.pivotTableData, this.props.chartOptions).create();
     if (!pivotTable) {
@@ -43,11 +55,6 @@ class PivotTable extends Component {
     }
 
     const { headerRows, bodyRows } = pivotTable;
-
-    // table creation
-    d3.select(ReactDOM.findDOMNode(this.refs.pivotTable))
-      .selectAll('*')
-      .remove();
 
     const table = d3.select(ReactDOM.findDOMNode(this.refs.pivotTable))
       .append('table')
@@ -105,6 +112,15 @@ class PivotTable extends Component {
           'data-value': d => (d ? d.value : '-'),
         })
         .text(d => (d ? d.value : '-'));
+  }
+
+  renderNoMeasureMessage() {
+    d3.select(ReactDOM.findDOMNode(this.refs.pivotTable))
+      .append('p')
+      .attr({
+        class: `${style['no-measure-message']}`,
+      })
+      .text('Please select measure at first');
   }
 
   render() {
