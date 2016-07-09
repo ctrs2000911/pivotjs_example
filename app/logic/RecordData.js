@@ -3,7 +3,10 @@ class RecordData {
     this.records = [];
 
     let recordString = '[]';
-    this.records.push(recordString);
+    this.records.push({
+      name: 'empty data',
+      recordString,
+    });
 
     recordString = `[{ "val1": 100, "cat": "a", "cat2": "a1", "cat3": "x", "date": "2016-01-01", "month": "2016-01", "day": "01" },
 { "val1": 200, "cat": "a", "cat2": "a2", "cat3": "x", "date": "2016-01-01", "month": "2016-01", "day": "01" },
@@ -15,7 +18,10 @@ class RecordData {
 { "val1": 200, "cat": "c", "cat2": "c1", "cat3": "y", "date": "2016-01-03", "month": "2016-01", "day": "03" },
 { "val1": 1000, "cat": "c", "cat2": "c1", "cat3": "x", "date": "2016-01-03", "month": "2016-01", "day": "03" },
 { "val1": 100, "cat": "c", "cat2": "c1", "cat3": "x", "date": "2016-01-03", "month": "2016-01", "day": "03" }]`;
-    this.records.push(recordString);
+    this.records.push({
+      name: 'test data 1',
+      recordString,
+    });
   }
 
 

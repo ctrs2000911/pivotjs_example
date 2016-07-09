@@ -26,7 +26,7 @@ class RecordsEditor extends Component {
     const id = parseInt(this.props.params.id, 10);
 
     const recordData = new RecordData();
-    const records = recordData.getAt(id);
+    const records = recordData.getAt(id).recordString;
 
     this.setState({ records });
     this.props.actions.changeRecords(records);

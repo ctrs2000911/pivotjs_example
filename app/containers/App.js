@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import { Card, CardHeader } from 'material-ui/Card';
-import RecordsEditor from '../components/RecordsEditor';
 import ChartOptions from '../components/ChartOptions';
 import PivotSetting from '../components/PivotSetting';
 import PivotTable from '../components/PivotTable';
@@ -14,9 +13,13 @@ class App extends Component {
   render() {
     const { pivot, chartOptions, actions, params } = this.props;
 
+    const recordsArea = React.cloneElement(this.props.children, {
+      pivot, actions, params,
+    });
+
     return (
       <div styleName="content-container">
-        <RecordsEditor pivot={pivot} actions={actions} params={params} />
+        {recordsArea}
         <Card styleName="content-block">
           <CardHeader
             title="Pivot Table"
@@ -39,6 +42,7 @@ App.propTypes = {
   chartOptions: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   params: PropTypes.object,
+  children: PropTypes.object.isRequired,
 };
 
 App.defaultProps = {
